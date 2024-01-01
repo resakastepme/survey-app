@@ -24,3 +24,4 @@ Route::get('/', function () {
     return view('index');
 });
 Route::post('/submit', [SurveyController::class, 'submit']);
+Route::post('/sendEmail', [SurveyController::class, 'sendEmail']);

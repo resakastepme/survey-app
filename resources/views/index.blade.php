@@ -69,7 +69,7 @@
                         <div class="card-body">
 
                             <label for="nama"> Nama </label>
-                            <input type="text" id="name" name="name" class="form-control"
+                            <input type="text" id="nama" name="nama" class="form-control"
                                 placeholder="default: Anonymous">
 
                             <label class="mt-2" for="email"> Email </label>
@@ -581,8 +581,8 @@
 
                     <div class="row">
                         <div class="col-md-4 p-5">
-                            <div class="animate__animated animate__jello">
-                                <div class="d-flex justify-content-center align-items-center">
+                            <div class="animate__animated animate__jello mt-5">
+                                <div class="d-flex justify-content-center align-items-center mt-5">
                                     <img src="{{ asset('img/checklist.png') }}" style="height: 200px; width: 200px;">
                                 </div>
                                 <h1 style="color: green" class="text-center mt-2"> SUKSES </h1>
@@ -593,6 +593,7 @@
                                 <hr>
                             </div>
                         </div>
+
                         <div class="col-md-8">
 
                             <div class="card rounded shadow border-0 bg-light">
@@ -602,23 +603,51 @@
                                         <tbody>
                                             <tr>
                                                 <td> <i class="fa-solid fa-user"></i> </td>
-                                                <td id="kustomisasiNama"> Resa Komara Akbari </td>
+                                                <td id="kustomisasiNama"> Memuat.. </td>
                                                 <td id="kustomisasiEmote"> 😁 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <h5> Ganti emote </h5>
                                     <div class="d-flex flex-wrap">
-                                            <p style="font-size: 50px; cursor: pointer;" id="emote1"> 😁 </p>
-                                            <p style="font-size: 50px; cursor: pointer;" id="emote2"> 🔥 </p>
-                                            <p style="font-size: 50px; cursor: pointer;" id="emote3"> 😎 </p>
-                                            <p style="font-size: 50px; cursor: pointer;" id="emote4"> ❤️ </p>
-                                            <p style="font-size: 50px; cursor: pointer;" id="emote5"> 🍌 </p>
-                                            <p style="font-size: 50px; cursor: pointer;" id="emote6"> 🗿 </p>
-                                            <p style="font-size: 50px; cursor: pointer;" id="emote7"> 🤌 </p>
-                                            <p style="font-size: 50px; cursor: pointer;" id="emote8"> 😱 </p>
+                                        <p style="font-size: 50px; cursor: pointer;" id="emoteChoosed" data-emote="1"> 😁
+                                        </p>
+                                        <p style="font-size: 50px; cursor: pointer;" id="emoteChoosed" data-emote="2"> 🔥
+                                        </p>
+                                        <p style="font-size: 50px; cursor: pointer;" id="emoteChoosed" data-emote="3"> 😎
+                                        </p>
+                                        <p style="font-size: 50px; cursor: pointer;" id="emoteChoosed" data-emote="4"> ❤️
+                                        </p>
+                                        <p style="font-size: 50px; cursor: pointer;" id="emoteChoosed" data-emote="5"> 🍌
+                                        </p>
+                                        <p style="font-size: 50px; cursor: pointer;" id="emoteChoosed" data-emote="6"> 🗿
+                                        </p>
+                                        <p style="font-size: 50px; cursor: pointer;" id="emoteChoosed" data-emote="7"> 🤌
+                                        </p>
+                                        <p style="font-size: 50px; cursor: pointer;" id="emoteChoosed" data-emote="8"> 😱
+                                        </p>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="card shadow rounded border-0 bg-light mt-2">
+                                <div class="card-body">
+
+                                    <h1> Kirim ucapan? </h1>
+                                    <label for="emailKustomisasi"> Email </label>
+                                    <input type="email" id="emailKustomisasi" name="emailKustomisasi"
+                                        class="form-control">
+                                    <p style="font-size: 9px;"> ***Catatan: dengan anda mengisi form email, anda menyetujui
+                                        untuk mendapat kiriman email. </p>
+                                    <input type="hidden" id="respondenIdHidden">
+
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-end align-items-end mt-3">
+                                <button class="btn btn-success" type="button" id="btnKustomisasi"> <i
+                                        class="spinner-border spinner-border-sm" id="submitKustomisasiSpinner"
+                                        style="display: none;"></i> OK </button>
                             </div>
 
                         </div>

@@ -255,12 +255,24 @@ $(document).ready(function () {
                 console.log(status);
                 if (status == 'ok') {
 
+                    $('#kustomisasiNama').html('');
+                    $('#kustomisasiNama').html(response.nama);
+
+                    $('#emailKustomisasi').val('');
+                    $('#emailKustomisasi').val(response.email);
+
+                    $('#respondenIdHidden').val('');
+                    $('#respondenIdHidden').val(response.responden_id);
+
+                    $('#submittedModal').removeClass('animate__fadeOut animate__faster').addClass('animate__fadeIn');
+                    $('#submittedModal').modal('show');
+
                 } else {
                     Swal.fire({
                         icon: "error",
                         title: "Error",
-                        text: "Please contact the developer! \
-                        error code: "+ response.code,
+                        text: "Please contact the developer! \n" +
+                            "Error code: " + response.code,
                         footer: '<a href="https://www.instagram.com/resaka.xmp" target="_blank">Go to dev social media</a>'
                     });
                 }
@@ -269,6 +281,83 @@ $(document).ready(function () {
             complete: function () {
                 $('#btnSubmit').prop('disabled', false);
                 $('#submitSpinner').hide();
+            }
+        });
+    });
+
+    var emote = 1;
+    $(document).on('click', '#emoteChoosed', function () {
+        var emoteID = $(this).data('emote');
+        if (emoteID == 1) {
+            emote = 1;
+            $('#kustomisasiEmote').html('');
+            $('#kustomisasiEmote').html('😁');
+        }
+        if (emoteID == 2) {
+            emote = 2;
+            $('#kustomisasiEmote').html('');
+            $('#kustomisasiEmote').html('🔥');
+        }
+        if (emoteID == 3) {
+            emote = 3;
+            $('#kustomisasiEmote').html('');
+            $('#kustomisasiEmote').html('😎');
+        }
+        if (emoteID == 4) {
+            emote = 4;
+            $('#kustomisasiEmote').html('');
+            $('#kustomisasiEmote').html('❤️');
+        }
+        if (emoteID == 5) {
+            emote = 5;
+            $('#kustomisasiEmote').html('');
+            $('#kustomisasiEmote').html('🍌');
+        }
+        if (emoteID == 6) {
+            emote = 6;
+            $('#kustomisasiEmote').html('');
+            $('#kustomisasiEmote').html('🗿');
+        }
+        if (emoteID == 7) {
+            emote = 7;
+            $('#kustomisasiEmote').html('');
+            $('#kustomisasiEmote').html('🤌');
+        }
+        if (emoteID == 8) {
+            emote = 8;
+            $('#kustomisasiEmote').html('');
+            $('#kustomisasiEmote').html('😱');
+        }
+    });
+
+    $('#btnKustomisasi').on('click', function () {
+        const responden_id = $('#respondenIdHidden').val();
+        const emailK = $('#emailKustomisasi').val();
+        const namaK = $('#kustomisasiNama').html();
+
+        $.ajax({
+            url: window.location.origin + '/sendEmail',
+            type: 'POST',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                responden_id: responden_id,
+                email: emailK,
+                nama: namaK
+            },
+            beforeSend: function () {
+                $('#btnKustomisasi').prop('disabled', true);
+                $('#submitKustomisasiSpinner').show();
+            },
+            success: function (response) {
+                console.log(response.status);
+            },
+            complete: function () {
+                $('#btnKustomisasi').prop('disabled', false);
+                $('#submitKustomisasiSpinner').hide();
+                $('#submittedModal').removeClass('animate__fadeIn').addClass('animate__fadeOut animate__faster');
+                setTimeout(function () {
+                    $('#submittedModal').modal('hide');
+                }, 300);
             }
         });
 

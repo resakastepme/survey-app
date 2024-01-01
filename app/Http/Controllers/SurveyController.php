@@ -18,6 +18,12 @@ class SurveyController extends Controller
     {
         try {
             $nama = $_POST['nama'];
+            $namaTrue = '';
+            if ($nama == '') {
+                $namaTrue = 'Anonymous#' . rand(10, 99) . Str::random(2);
+            } else {
+                $namaTrue = $nama;
+            }
             $email = $_POST['email'];
             $jenis_kelamin = $_POST['jenis_kelamin'];
             $rentang_usia = $_POST['rentang_usia'];
@@ -34,19 +40,6 @@ class SurveyController extends Controller
             $fitur_utama = $_POST['fitur_utama'];
             $seberapa_nyaman = $_POST['seberapa_nyaman'];
             $platform_email = $_POST['platform_email'];
-
-            $responden = [
-                'nama' => $nama,
-                'email' => $email,
-                'jenis_kelamin' => $jenis_kelamin,
-                'rentang_usia' => $rentang_usia,
-                'pekerjaan' => $pekerjaan,
-                'bidang_industri' => $bidang_industri,
-                'emote' => 1
-            ];
-
-            $q = Respondens::create($responden);
-            $responden_id = $q['id'];
 
             $result = [
                 'menggunakan_email' => $menggunakan_email,
@@ -65,12 +58,28 @@ class SurveyController extends Controller
             $q2 = Results::create($result);
             $result_id = $q2['id'];
 
+            $responden = [
+                'result_id' => $result_id,
+                'nama' => $namaTrue,
+                'email' => $email,
+                'jenis_kelamin' => $jenis_kelamin,
+                'rentang_usia' => $rentang_usia,
+                'pekerjaan' => $pekerjaan,
+                'bidang_industri' => $bidang_industri,
+                'emote' => 1
+            ];
+
+            $q = Respondens::create($responden);
+            $responden_id = $q['id'];
+
             Cache::forever('surveys_isSubmitted', '1');
 
             return response()->json([
                 'status' => 'ok',
                 'responden_id' => $responden_id,
-                'result_id' => $result_id
+                'result_id' => $result_id,
+                'nama' => $namaTrue,
+                'email' => $email
             ]);
         } catch (\Throwable $th) {
             $unique = time() . Str::random(2);
@@ -84,5 +93,22 @@ class SurveyController extends Controller
                 'code' => $unique
             ]);
         }
+
+        $namaDummy = 'Fina Annisa Rahmasari';
+        if (stripos($namaDummy, 'fina') !== false) {
+            return true;
+        } else {
+            return false;
+        }
     }
+
+    public function sendEmail () {
+        $responden_id = $_POST['responden_id'];
+        $nama = $_POST['nama'];
+        $email = $_POST['email'];
+
+
+
+    }
+
 }
