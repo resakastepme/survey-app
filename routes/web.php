@@ -14,6 +14,12 @@ use App\Http\Controllers\SurveyController;
 |
 */
 
+//STORAGE:LINK ROUTE
+Route::get('/generate', function(){
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
+    echo 'ok';
+ });
+
 Route::get('/', function () {
     return view('index');
 });
