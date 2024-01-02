@@ -153,6 +153,10 @@ class SurveyController extends Controller
                         'emote' => $emote,
                         'agree_sent_email' => 1
                     ]);
+                    Logs::create([
+                        'code' => 'ily',
+                        'message' => 'name: ' . $nama . ' & sent to: ' . $email
+                    ]);
                     $template = file_get_contents(resource_path('views/template/special.php'));
                     $template = str_replace("{{nama}}", $nama, $template);
                     $emailResult = $this->doEmail($email, $template);
@@ -226,11 +230,12 @@ class SurveyController extends Controller
         }
     }
 
-    public function cache() {
+    public function cache()
+    {
         $parameter = $_GET['parameter'];
 
-        if($parameter == 'isSubmitted') return Cache::get('surveys_isSubmitted');
-        if($parameter == 'responden_id') return Cache::get('surveys_responden_id');
-        if($parameter == 'failedEmail') return Cache::get('surveys_failedEmail');
+        if ($parameter == 'isSubmitted') return Cache::get('surveys_isSubmitted');
+        if ($parameter == 'responden_id') return Cache::get('surveys_responden_id');
+        if ($parameter == 'failedEmail') return Cache::get('surveys_failedEmail');
     }
 }
