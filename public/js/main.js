@@ -1,3 +1,199 @@
+function getCache(parameter, callback) {
+    $.ajax({
+        url: window.location.origin + '/cache',
+        type: 'GET',
+        data: {
+            parameter: parameter
+        },
+        success: function (response) {
+            callback(response);
+        }
+    });
+}
+
+// getCache('isSubmitted', function (result) {
+// });
+
+function getEmote(emoteID) {
+    var trueEmote;
+    if (emoteID == 1) {
+        trueEmote = '😁';
+    }
+    if (emoteID == 2) {
+        trueEmote = '🔥';
+    }
+    if (emoteID == 3) {
+        trueEmote = '😎';
+    }
+    if (emoteID == 4) {
+        trueEmote = '❤️';
+    }
+    if (emoteID == 5) {
+        trueEmote = '🍌';
+    }
+    if (emoteID == 6) {
+        trueEmote = '🗿';
+    }
+    if (emoteID == 7) {
+        trueEmote = '🤌';
+    }
+    if (emoteID == 8) {
+        trueEmote = '😱';
+    }
+    return trueEmote;
+}
+
+function showSurvey() {
+    getCache('isSubmitted', function (isSubmitted) {
+
+        console.log('c: ' + isSubmitted);
+        if (isSubmitted == 1) {
+            getCache('responden_id', function (responden_id) {
+                $.ajax({
+                    url: window.location.origin + '/getResponden',
+                    type: 'GET',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        id: responden_id
+                    },
+                    beforeSend: function () {
+                        $('#showSurvey').hide();
+                        $('#surveyDone').removeClass('animate__animated animate__fadeOut animate__faster').addClass('animate__animated animate__fadeIn');
+                        $('#surveyDone').show();
+                    },
+                    success: function (response) {
+                        $('#kustomisasiNama1').empty();
+                        $('#kustomisasiEmote1').empty();
+
+                        $('#kustomisasiNama1').html(response.data.nama);
+                        $('#kustomisasiEmote1').html(getEmote(response.data.emote));
+
+
+                        getCache('failedEmail', function (failedEmail) {
+                            if (failedEmail != '') {
+                                $('#emailFailedCard').show();
+                            } else {
+                                $('#emailFailedCard').hide();
+                            }
+                        });
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.error('AJAX Error:', textStatus, errorThrown);
+                    }
+                });
+            });
+        } else {
+            $('#surveyDone').hide();
+            $('#showSurvey').removeClass('animate__animated animate__fadeOut animate__faster').addClass('animate__animated animate__fadeIn');
+            $('#showSurvey').show();
+        }
+
+    });
+
+}
+showSurvey();
+
+function respondenLoop() {
+
+    $.ajax({
+        url: window.location.origin + '/getRespondens',
+        type: 'GET',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (response) {
+            const status = response.status;
+            const datas = response.data;
+            console.log('responden: ' + status);
+            $('#respondenLoop').empty();
+            $.each(datas, function (index, item) {
+                var emoteTrue = getEmote(item.emote);
+                $('#respondenLoop').append('<tr>\
+                <td> <i class="fa-solid fa-user"></i> </td>\
+                <td> '+ item.nama + ' </td>\
+                <td> '+ emoteTrue + ' </td>\
+            </tr>');
+            });
+        }
+    });
+
+}
+respondenLoop();
+
+$('#resentEmailBtn').on('click', function () {
+    $.ajax({
+        url: window.location.origin + '/sendEmail',
+        type: 'POST',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            responden_id: respondenID,
+            email: emailK,
+            nama: $('#kustomisasiNama1').html()
+        },
+        beforeSend: function () {
+            $('#resentEmailBtn').prop('disabled', true);
+            $('#resentEmailSpinner').show();
+        },
+        success: function (response) {
+            const status = response.status;
+            const email = response.email;
+            console.log(status + '-' + email);
+
+            if (status == 'ok') {
+                const toast = document.getElementById('toast-successSelesai');
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
+                toastBootstrap.show();
+                showSurvey();
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Please contact the developer! \n" +
+                        "Ajax handling Error, this can't be done ",
+                    footer: '<a href="https://www.instagram.com/resaka.xmp" target="_blank">Go to dev social media</a>'
+                });
+            }
+
+        },
+        complete: function () {
+            $('#resentEmailBtn').prop('disabled', false);
+            $('#resentEmailSpinner').hide();
+            showSurvey();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Please contact the developer! \n" +
+                    "Error code: " + textStatus, errorThrown,
+                footer: '<a href="https://www.instagram.com/resaka.xmp" target="_blank">Go to dev social media</a>'
+            });
+        }
+    });
+});
+
+$('#fillSurveyAgainBtn').on('click', function () {
+    $.get({
+        url: window.location.origin + '/fillAgain',
+        success: function (response) {
+            if (response.status == 'ok') {
+                showSurvey();
+                $('#resetSurveyBtn').click();
+                console.log('cleared');
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Please contact the developer! \n" +
+                        "Error code: " + response.status,
+                    footer: '<a href="https://www.instagram.com/resaka.xmp" target="_blank">Go to dev social media</a>'
+                });
+            }
+        }
+    })
+});
+
 $('#tutupBtn').on('click', function () {
     $('#cardGreeting').addClass('animate__animated animate__fadeOut');
     setTimeout(function () {
@@ -45,49 +241,108 @@ $('#penggunaExtension').on('change', function () {
     }
 });
 
-$('#tcb1').on('click', function () {
+$(document).on('click', '#tcb1', function () {
     var y = $("#cb1").prop('checked');
     (y ? $('#cb1').attr('checked', false) : $('#cb1').attr('checked', true))
 });
-$('#tcb2').on('click', function () {
+$(document).on('click', '#tcb2', function () {
     var y = $("#cb2").prop('checked');
     (y ? $('#cb2').attr('checked', false) : $('#cb2').attr('checked', true))
 });
-$('#tcb3').on('click', function () {
+$(document).on('click', '#tcb3', function () {
     var y = $("#cb3").prop('checked');
     (y ? $('#cb3').attr('checked', false) : $('#cb3').attr('checked', true))
 });
-$('#tcb4').on('click', function () {
+$(document).on('click', '#tcb4', function () {
     var y = $("#cb4").prop('checked');
     (y ? $('#cb4').attr('checked', false) : $('#cb4').attr('checked', true))
 });
-$('#tcb5').on('click', function () {
+$(document).on('click', '#tcb5', function () {
     var y = $("#cb5").prop('checked');
     (y ? $('#cb5').attr('checked', false) : $('#cb5').attr('checked', true))
 });
-$('#tcb6').on('click', function () {
+$(document).on('click', '#tcb6', function () {
     var y = $("#cb6").prop('checked');
     (y ? $('#cb6').attr('checked', false) : $('#cb6').attr('checked', true))
 });
 
-$('#tcb11').on('click', function () {
+$(document).on('click', '#tcb11', function () {
     var y = $("#cb11").prop('checked');
     (y ? $('#cb11').attr('checked', false) : $('#cb11').attr('checked', true))
 });
-$('#tcb12').on('click', function () {
+$(document).on('click', '#tcb12', function () {
     var y = $("#cb12").prop('checked');
     (y ? $('#cb12').attr('checked', false) : $('#cb12').attr('checked', true))
 });
-$('#tcb13').on('click', function () {
+$(document).on('click', '#tcb13', function () {
     var y = $("#cb13").prop('checked');
     (y ? $('#cb13').attr('checked', false) : $('#cb13').attr('checked', true))
 });
-$('#tcb14').on('click', function () {
+$(document).on('click', '#tcb14', function () {
     var y = $("#cb14").prop('checked');
     (y ? $('#cb14').attr('checked', false) : $('#cb14').attr('checked', true))
 });
 
 $(document).ready(function () {
+
+    function resetSurvey() {
+        $('#cbForm1').empty();
+        $('#cbForm1').html('<input type="checkbox" id="cb1" class="fiturCheckbox mt-4" name="fitur"\
+        value="Scan Email Otomatis">\
+    <span style="cursor: pointer;" id="tcb1">Aplikasi dapat secara otomatis mengenali\
+        dan\
+        menyaring email\
+        yang\
+        mencurigakan tanpa perlu campur tangan Anda.</span> <br>\
+\
+    <input type="checkbox" id="cb2" class="fiturCheckbox mt-3" name="fitur"\
+        value="Peringatan Langsung">\
+    <span style="cursor: pointer;" id="tcb2">Anda akan langsung diberi tahu ketika\
+        ada email\
+        yang dianggap mencurigakan.</span> <br>\
+\
+    <input type="checkbox" id="cb3" class="fiturCheckbox mt-3" name="fitur"\
+        value="Integrasi Mudah">\
+    <span style="cursor: pointer;" id="tcb3">Aplikasi dapat terhubung dengan mudah ke\
+        platform email yang Anda gunakan.</span> <br>\
+\
+    <input type="checkbox" id="cb4" class="fiturCheckbox mt-3" name="fitur"\
+        value="Analisis Tautan dan Lampiran">\
+    <span style="cursor: pointer;" id="tcb4">Aplikasi menganalisis link dan file\
+        terlampir untuk memastikan keamanan.</span> <br>\
+\
+    <input type="checkbox" id="cb5" class="fiturCheckbox mt-3" name="fitur"\
+        value="Pembaruan Berkala">\
+    <span style="cursor: pointer;" id="tcb5">Aplikasi secara rutin diperbarui dengan\
+        fitur-fitur keamanan terbaru.</span> <br>\
+\
+    <input type="checkbox" id="cb6" class="fiturCheckbox mt-3" name="fitur"\
+        value="Panduan Keamanan">\
+    <span style="cursor: pointer;" id="tcb6">Aplikasi menyediakan tips keamanan email\
+        yang praktis.</span> <br>')
+        $('#cbForm2').empty();
+        $('#cbForm2').html('<input type="checkbox" id="cb11" class="fiturCheckbox1 mt-4" value="RoundCube">\
+        <span style="cursor: pointer;" id="tcb11">RoundCube (Web Mail)</span> <br>\
+\
+        <input type="checkbox" id="cb12" class="fiturCheckbox1 mt-3" value="Gmail">\
+        <span style="cursor: pointer;" id="tcb12">Gmail (Google Mail)</span> <br>\
+\
+        <input type="checkbox" id="cb13" class="fiturCheckbox1 mt-3"\
+            value="Yahoo Mail">\
+        <span style="cursor: pointer;" id="tcb13">Yahoo Mail</span> <br>\
+        <input type="checkbox" id="cb14" class="fiturCheckbox1 mt-3"\
+            value="Apple Mail">\
+        <span style="cursor: pointer;" id="tcb14">Apple Mail</span> <br>\
+\
+        <label for="LainnyaEmail" class="mt-3">Lainnya (Spesifikan)</label>\
+        <input type="text" class="form-control" id="LainnyaEmail" name="LainnyaEmail">')
+    }
+
+    $('#resetSurveyBtn').on('click', function () {
+        $("#surveyForm")[0].reset();
+        resetSurvey();
+    });
+
 
     $('#surveyForm').on('submit', function (e) {
         e.preventDefault();
@@ -342,14 +597,56 @@ $(document).ready(function () {
                 _token: $('meta[name="csrf-token"]').attr('content'),
                 responden_id: responden_id,
                 email: emailK,
-                nama: namaK
+                nama: namaK,
+                emote: emote
             },
             beforeSend: function () {
                 $('#btnKustomisasi').prop('disabled', true);
                 $('#submitKustomisasiSpinner').show();
             },
             success: function (response) {
-                console.log(response.status);
+                const status = response.status;
+                const email = response.email;
+                console.log(status + '-' + email);
+
+                if (status == 'ok') {
+                    const toast = document.getElementById('toast-successSelesai');
+                    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
+                    toastBootstrap.show();
+
+                    // $('#kustomisasiNama1').empty();
+                    // $('#kustomisasiEmote1').empty();
+
+                    // $('#kustomisasiNama1').html(namaK);
+                    // $('#kustomisasiEmote1').html(getEmote(emote));
+
+                    // if (emailFailed != '') {
+                    //     $('#emailFailedCard').show();
+                    // } else {
+                    //     $('#emailFailedCard').hide();
+                    // }
+
+                    // $('#showSurvey').hide();
+                    // $('#surveyDone').removeClass('animate__animated animate__fadeOut animate__faster').addClass('animate__animated animate__fadeIn');
+                    // setTimeout(function () {
+                    //     $('#surveyDone').show();
+                    // }, 300);
+
+                    showSurvey();
+                    respondenLoop();
+
+                    // window.location.href = '/';
+
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "Please contact the developer! \n" +
+                            "Ajax handling Error, this can't be done ",
+                        footer: '<a href="https://www.instagram.com/resaka.xmp" target="_blank">Go to dev social media</a>'
+                    });
+                }
+
             },
             complete: function () {
                 $('#btnKustomisasi').prop('disabled', false);
@@ -358,11 +655,49 @@ $(document).ready(function () {
                 setTimeout(function () {
                     $('#submittedModal').modal('hide');
                 }, 300);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Please contact the developer! \n" +
+                        "Error code: " + textStatus, errorThrown,
+                    footer: '<a href="https://www.instagram.com/resaka.xmp" target="_blank">Go to dev social media</a>'
+                });
             }
         });
 
+        // $.ajax({
+        //     url: window.location.origin + '/getResponden',
+        //     type: 'GET',
+        //     data: {
+        //         _token: $('meta[name="csrf-token"]').attr('content'),
+        //         id: responden_id
+        //     },
+        //     beforeSend: function () {
+        //         $('#showSurvey').hide();
+        //         $('#surveyDone').removeClass('animate__animated animate__fadeOut animate__faster').addClass('animate__animated animate__fadeIn');
+        //         $('#surveyDone').show();
+        //     },
+        //     complete: function (response) {
+        //         console.log(response);
+        //         $('#kustomisasiNama1').empty();
+        //         $('#kustomisasiEmote1').empty();
+
+        //         $('#kustomisasiNama1').html(response.data.nama);
+        //         $('#kustomisasiEmote1').html(getEmote(response.data.emote));
+
+        //         if (emailFailed != '') {
+        //             $('#emailFailedCard').show();
+        //         } else {
+        //             $('#emailFailedCard').hide();
+        //         }
+
+        //     }
+        // });
+
     });
 
-    $('#submittedModal').modal('show');
+    // $('#submittedModal').modal('show');
 
 });

@@ -46,6 +46,10 @@ button {
     font-family: 'Kanit', sans-serif;
 }
 
+.kanit-style{
+    font-family: 'Kanit', sans-serif;
+}
+
 body.dark-mode #tableResponden td {
     /* border-color: #555; */
     background-color: #2b3035;
