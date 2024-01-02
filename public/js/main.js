@@ -112,7 +112,7 @@ function respondenLoop() {
                 var emoteTrue = getEmote(2);
                 $('#respondenLoop').append('<tr>\
                 <td> <i class="fa-solid fa-user"></i> </td>\
-                <td> Belum ada responden, jadilah yang pertama! </td>\
+                <td class="text-center"> Belum ada responden, jadilah yang pertama! </td>\
                 <td> '+ emoteTrue + ' </td>\
                 </tr>');
             }else{
