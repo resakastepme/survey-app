@@ -105,16 +105,26 @@ function respondenLoop() {
         success: function (response) {
             const status = response.status;
             const datas = response.data;
+            const count = response.count;
             console.log('responden: ' + status);
             $('#respondenLoop').empty();
-            $.each(datas, function (index, item) {
-                var emoteTrue = getEmote(item.emote);
+            if(count == 0){
+                var emoteTrue = getEmote(2);
                 $('#respondenLoop').append('<tr>\
                 <td> <i class="fa-solid fa-user"></i> </td>\
-                <td> '+ item.nama + ' </td>\
+                <td> Belum ada responden, jadilah yang pertama! </td>\
                 <td> '+ emoteTrue + ' </td>\
-            </tr>');
-            });
+                </tr>');
+            }else{
+                $.each(datas, function (index, item) {
+                    var emoteTrue = getEmote(item.emote);
+                    $('#respondenLoop').append('<tr>\
+                    <td> <i class="fa-solid fa-user"></i> </td>\
+                    <td> '+ item.nama + ' </td>\
+                    <td> '+ emoteTrue + ' </td>\
+                </tr>');
+                });
+            }
         }
     });
 

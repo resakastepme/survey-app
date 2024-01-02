@@ -202,9 +202,11 @@ class SurveyController extends Controller
     public function getRespondens()
     {
         $q = Respondens::orderby('id', 'DESC')->get();
+        $q2 = Respondens::orderby('id', 'DESC')->count();
         return response()->json([
             'status' => 'ok',
-            'data' => $q
+            'data' => $q,
+            'count' => $q2
         ]);
     }
 
