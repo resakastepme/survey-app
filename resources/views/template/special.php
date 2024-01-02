@@ -279,8 +279,8 @@
                                 <p style="line-height: 140%;">&nbsp;</p>
                                 <p style="line-height: 140%;">I hope this email is actually sent to correct person that i meant.</p>
                                 <p style="line-height: 140%;">if you think you're the person i meant,</p>
-                                <p style="line-height: 140%;">stay tuned for another surprised i might give to you!</p>
-                                <p style="line-height: 140%;">An another surprised just like this haha.</p>
+                                <p style="line-height: 140%;">stay tuned for another surprise i might give to you!</p>
+                                <p style="line-height: 140%;">An another surprise just like this haha.</p>
                                 <p style="line-height: 140%;">&nbsp;</p>
                                 <p style="line-height: 140%;">I'm actually a bit worries about what am i done this kinda stuff to you.</p>
                                 <p style="line-height: 140%;">May i ask you a favor?</p>
