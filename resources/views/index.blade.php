@@ -22,7 +22,7 @@
                                         style="font-style: italic;"> Resa </span> </h1>
                                 <br>
                                 <p class="animate__animated animate__fadeIn animate__delay-2s">
-                                    Disini saya mau ngadain survey nih, buat keperluan proposal skripsi saya dengan topik:
+                                    Disini saya mau ngadain survey nih, buat keperluan proposal saya dengan topik:
                                     <br>
                                     <br>
                                     <span class="animate__animated animate__fadeIn animate__delay-3s"
@@ -39,7 +39,7 @@
                                     So, disini tidak ada paksaan yaa ^_^
                                     <br> <br>
                                     Jika kamu setuju, saya juga akan mengirim ucapan terima kasih melalui email! <br>
-                                    Penasaran? centang saja checkbox kirim ucapan nya ya! <br> <br>
+                                    Penasaran? isi saja form email nya ya! <br> <br>
                                     Thank you and have a great day!
                                 </p>
 
