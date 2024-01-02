@@ -87,6 +87,8 @@
                                         style="display: none;">
                                         <div class="card-body">
                                             <h3 class="kanit-style"> Email mu gagal terkirim! </h3>
+                                            <input type="hidden" id="failedEmailHidden">
+                                            <input type="hidden" id="respondenIdHidden">
                                             <button type="button" class="btn btn-secondary" id="resentEmailBtn"> <i
                                                     class="spinner-border spinner-border-sm" id="resentEmailSpinner"
                                                     style="display: none;"></i> Coba lagi </button>

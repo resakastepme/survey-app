@@ -123,59 +123,62 @@ respondenLoop();
 
 $('#resentEmailBtn').on('click', function () {
     getCache('responden_id', function (responden_id) {
-        getCache('failedEmail', function (failedEmail) {
+        $('#respondenIdHidden').val('');
+        $('#respondenIdHidden').val(responden_id);
+    });
+    getCache('failedEmail', function (failedEmail) {
+        $('#failedEmailHidden').val('');
+        $('#failedEmailHidden').val(failedEmail);
+    });
 
-            $.ajax({
-                url: window.location.origin + '/sendEmail',
-                type: 'POST',
-                data: {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    responden_id: responden_id,
-                    email: failedEmail,
-                    nama: $('#kustomisasiNama1').html()
-                },
-                beforeSend: function () {
-                    $('#resentEmailBtn').prop('disabled', true);
-                    $('#resentEmailSpinner').show();
-                },
-                success: function (response) {
-                    const status = response.status;
-                    const email = response.email;
-                    console.log(status + '-' + email);
+    $.ajax({
+        url: window.location.origin + '/sendEmail',
+        type: 'POST',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            responden_id: $('#respondenIdHidden').val(),
+            email: $('#failedEmailHidden').val(),
+            nama: $('#kustomisasiNama1').html()
+        },
+        beforeSend: function () {
+            $('#resentEmailBtn').prop('disabled', true);
+            $('#resentEmailSpinner').show();
+        },
+        success: function (response) {
+            const status = response.status;
+            const email = response.email;
+            console.log(status + '-' + email);
 
-                    if (status == 'ok') {
-                        const toast = document.getElementById('toast-successSelesai');
-                        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
-                        toastBootstrap.show();
-                        showSurvey();
-                    } else {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Error",
-                            text: "Please contact the developer! \n" +
-                                "Ajax handling Error, this can't be done ",
-                            footer: '<a href="https://www.instagram.com/resaka.xmp" target="_blank">Go to dev social media</a>'
-                        });
-                    }
+            if (status == 'ok') {
+                const toast = document.getElementById('toast-successSelesai');
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
+                toastBootstrap.show();
+                showSurvey();
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Please contact the developer! \n" +
+                        "Ajax handling Error, this can't be done ",
+                    footer: '<a href="https://www.instagram.com/resaka.xmp" target="_blank">Go to dev social media</a>'
+                });
+            }
 
-                },
-                complete: function () {
-                    $('#resentEmailBtn').prop('disabled', false);
-                    $('#resentEmailSpinner').hide();
-                    showSurvey();
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: "Please contact the developer! \n" +
-                            "Error code: " + textStatus, errorThrown,
-                        footer: '<a href="https://www.instagram.com/resaka.xmp" target="_blank">Go to dev social media</a>'
-                    });
-                }
+        },
+        complete: function () {
+            $('#resentEmailBtn').prop('disabled', false);
+            $('#resentEmailSpinner').hide();
+            showSurvey();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Please contact the developer! \n" +
+                    "Error code: " + textStatus, errorThrown,
+                footer: '<a href="https://www.instagram.com/resaka.xmp" target="_blank">Go to dev social media</a>'
             });
-
-        });
+        }
     });
 });
 
