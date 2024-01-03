@@ -49,7 +49,7 @@
                         {{-- <li class="nav-item">
                                 <a class="nav-link" href="#">Link</a>
                             </li> --}}
-                        <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Bahasa: <span id="inisialLang">ID</span>
@@ -59,7 +59,7 @@
                                 <li><a class="dropdown-item" href="#">EN</a></li>
                                 <li><a class="dropdown-item" href="#">PH</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link" id="defaultThemeBtn" style="cursor: pointer;"> Tema: <span
                                     id="themeDOM">Light</span> </a>
