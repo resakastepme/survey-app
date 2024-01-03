@@ -21,17 +21,19 @@
 </head>
 
 <body>
+
+
     <section id="loadContent" style="display: block;">
         <div id="spinner"
-            class="show position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                {{-- <span class="sr-only">Loading...</span> --}}
-            </div>
+        class="show position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            {{-- <span class="sr-only">Loading...</span> --}}
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="contentLoaded" style="display: none;">
-        <nav class="navbar navbar-expand-lg fixed-top" id="navbarExample">
+<section id="contentLoaded" style="display: none;">
+    <nav class="navbar navbar-expand-lg fixed-top" id="navbarExample">
             <div class="container-fluid">
 
                 <a class="navbar-brand" href="{{ url('/') }}"> <i class="fa-solid fa-ghost"

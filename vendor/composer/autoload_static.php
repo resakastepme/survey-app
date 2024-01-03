@@ -19,15 +19,15 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '662a729f963d39afe703c9d9b7ab4a8c' => __DIR__ . '/..' . '/symfony/polyfill-php83/bootstrap.php',
         'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
         '35a6ad97d21e794e7e22a17d806652e4' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Functions.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '09f6b20656683369174dd6fa83b7e5fb' => __DIR__ . '/..' . '/symfony/polyfill-uuid/bootstrap.php',
-        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '47e1160838b5e5a10346ac4084b58c23' => __DIR__ . '/..' . '/laravel/prompts/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '265b4faa2b3a9766332744949e83bf97' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/helpers.php',
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
         'f57d353b41eb2e234b26064d63d8c5dd' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Filesystem/functions.php',
@@ -86,7 +86,6 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
             'Symfony\\Component\\ErrorHandler\\' => 31,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
-            'Stichoza\\GoogleTranslate\\' => 25,
             'Spatie\\LaravelIgnition\\' => 23,
             'Spatie\\Ignition\\' => 16,
             'Spatie\\FlareClient\\' => 19,
@@ -317,10 +316,6 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
-        ),
-        'Stichoza\\GoogleTranslate\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/stichoza/google-translate-php/src',
         ),
         'Spatie\\LaravelIgnition\\' => 
         array (
@@ -5508,14 +5503,6 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'Spatie\\LaravelIgnition\\Support\\StringComparator' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/Support/StringComparator.php',
         'Spatie\\LaravelIgnition\\Views\\BladeSourceMapCompiler' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/Views/BladeSourceMapCompiler.php',
         'Spatie\\LaravelIgnition\\Views\\ViewExceptionMapper' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/Views/ViewExceptionMapper.php',
-        'Stichoza\\GoogleTranslate\\Exceptions\\LargeTextException' => __DIR__ . '/..' . '/stichoza/google-translate-php/src/Exceptions/LargeTextException.php',
-        'Stichoza\\GoogleTranslate\\Exceptions\\RateLimitException' => __DIR__ . '/..' . '/stichoza/google-translate-php/src/Exceptions/RateLimitException.php',
-        'Stichoza\\GoogleTranslate\\Exceptions\\TranslationDecodingException' => __DIR__ . '/..' . '/stichoza/google-translate-php/src/Exceptions/TranslationDecodingException.php',
-        'Stichoza\\GoogleTranslate\\Exceptions\\TranslationRequestException' => __DIR__ . '/..' . '/stichoza/google-translate-php/src/Exceptions/TranslationRequestException.php',
-        'Stichoza\\GoogleTranslate\\GoogleTranslate' => __DIR__ . '/..' . '/stichoza/google-translate-php/src/GoogleTranslate.php',
-        'Stichoza\\GoogleTranslate\\Tokens\\GoogleTokenGenerator' => __DIR__ . '/..' . '/stichoza/google-translate-php/src/Tokens/GoogleTokenGenerator.php',
-        'Stichoza\\GoogleTranslate\\Tokens\\SampleTokenGenerator' => __DIR__ . '/..' . '/stichoza/google-translate-php/src/Tokens/SampleTokenGenerator.php',
-        'Stichoza\\GoogleTranslate\\Tokens\\TokenProviderInterface' => __DIR__ . '/..' . '/stichoza/google-translate-php/src/Tokens/TokenProviderInterface.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\Attribute\\AsCommand' => __DIR__ . '/..' . '/symfony/console/Attribute/AsCommand.php',

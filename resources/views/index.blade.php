@@ -17,7 +17,6 @@
 
                             </div>
                             <div class="col-md-8">
-
                                 <h1 class="animate__animated animate__fadeIn animate__delay-1s"> Hello! kenalin saya <span
                                         style="font-style: italic;"> Resa </span> </h1>
                                 <br>
@@ -42,7 +41,6 @@
                                     Penasaran? isi saja form email nya ya! <br> <br>
                                     Thank you and have a great day!
                                 </p>
-
                             </div>
 
                             <div
@@ -446,7 +444,8 @@
                                 type="submit"> <i class="spinner-border spinner-border-sm" id="submitSpinner"
                                     style="display: none;"></i>
                                 Submit </button>
-                            <button class="btn btn-rounded btn-secondary mt-2" style="width: 50%" type="button" id="resetSurveyBtn"> Clear
+                            <button class="btn btn-rounded btn-secondary mt-2" style="width: 50%" type="button"
+                                id="resetSurveyBtn"> Clear
                             </button>
                         </div>
 
