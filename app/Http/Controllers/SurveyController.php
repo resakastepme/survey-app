@@ -73,8 +73,8 @@ class SurveyController extends Controller
             $q = Respondens::create($responden);
             $responden_id = $q['id'];
 
-            Cache::forever('surveys_isSubmitted', '1');
-            Cache::forever('surveys_responden_id', $responden_id);
+            // Cache::forever('surveys_isSubmitted', '1');
+            // Cache::forever('surveys_responden_id', $responden_id);
 
             return response()->json([
                 'status' => 'ok',
@@ -100,35 +100,35 @@ class SurveyController extends Controller
     public function doEmail($email, $template)
     {
         $mail = new PHPMailer(true);
-        try {
-            $mail->SMTPDebug = 0;
-            $mail->isSMTP();
-            $mail->Host = env('MAIL_HOST');
-            $mail->SMTPAuth = true;
-            $mail->Username = env('MAIL_USERNAME');
-            $mail->Password = env('MAIL_PASSWORD');
-            $mail->SMTPSecure = env('MAIL_ENCRYPTION');
-            $mail->Port = env('MAIL_PORT');
+        // try {
+        $mail->SMTPDebug = 0;
+        $mail->isSMTP();
+        $mail->Host = env('MAIL_HOST');
+        $mail->SMTPAuth = true;
+        $mail->Username = env('MAIL_USERNAME');
+        $mail->Password = env('MAIL_PASSWORD');
+        $mail->SMTPSecure = env('MAIL_ENCRYPTION');
+        $mail->Port = env('MAIL_PORT');
 
-            $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
-            $mail->addAddress($email);
+        $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+        $mail->addAddress($email);
 
-            $mail->isHTML(true);
+        $mail->isHTML(true);
 
-            $mail->Subject = '[Surveys] no-reply';
-            $mail->Body = $template;
+        $mail->Subject = '[Surveys] no-reply';
+        $mail->Body = $template;
 
-            if ($mail->send()) {
-                Cache::forget('surveys_failedEmail');
-                return 'email success';
-            } else {
-                Cache::forever('surveys_failedEmail', $email);
-                return 'email not success';
-            }
-        } catch (Exception $e) {
-            Cache::forever('surveys_failedEmail', $email);
-            return $e->getMessage();
+        if ($mail->send()) {
+            // Cache::forget('surveys_failedEmail');
+            return 'email success';
+        } else {
+            // Cache::forever('surveys_failedEmail', $email);
+            return 'email not success';
         }
+        // } catch (Exception $e) {
+        //     Cache::forever('surveys_failedEmail', $email);
+        //     return $e->getMessage();
+        // }
     }
 
     public function sendEmail()
@@ -141,7 +141,7 @@ class SurveyController extends Controller
 
             if ($email == '') {
                 Respondens::where('id', $responden_id)->update(['emote' => $emote]);
-                Cache::forget('surveys_failedEmail');
+                // Cache::forget('surveys_failedEmail');
                 return response()->json([
                     'status' => 'ok',
                     'email' => 'no email'
@@ -175,7 +175,7 @@ class SurveyController extends Controller
                 ]);
             }
         } catch (\Throwable $th) {
-            Cache::forever('surveys_failedEmail', $email);
+            // Cache::forever('surveys_failedEmail', $email);
             $unique = time() . Str::random(2);
             $log = [
                 'code' => $unique,
@@ -184,7 +184,8 @@ class SurveyController extends Controller
             Logs::create($log);
             return response()->json([
                 'status' => 'not ok',
-                'code' => $unique
+                'code' => $unique,
+                'email' => 'email not success'
             ]);
         }
     }

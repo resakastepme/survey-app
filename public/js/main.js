@@ -1,15 +1,15 @@
-function getCache(parameter, callback) {
-    $.ajax({
-        url: window.location.origin + '/cache',
-        type: 'GET',
-        data: {
-            parameter: parameter
-        },
-        success: function (response) {
-            callback(response);
-        }
-    });
-}
+// function getCache(parameter, callback) {
+//     $.ajax({
+//         url: window.location.origin + '/cache',
+//         type: 'GET',
+//         data: {
+//             parameter: parameter
+//         },
+//         success: function (response) {
+//             callback(response);
+//         }
+//     });
+// }
 
 // getCache('isSubmitted', function (result) {
 // });
@@ -44,52 +44,52 @@ function getEmote(emoteID) {
 }
 
 function showSurvey() {
-    getCache('isSubmitted', function (isSubmitted) {
+    // getCache('isSubmitted', function (isSubmitted) {
 
-        console.log('c: ' + isSubmitted);
-        if (isSubmitted == 1) {
-            getCache('responden_id', function (responden_id) {
-                $.ajax({
-                    url: window.location.origin + '/getResponden',
-                    type: 'GET',
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        id: responden_id
-                    },
-                    beforeSend: function () {
-                        $('#showSurvey').hide();
-                        $('#surveyDone').removeClass('animate__animated animate__fadeOut animate__faster').addClass('animate__animated animate__fadeIn');
-                        $('#surveyDone').show();
-                    },
-                    success: function (response) {
-                        $('#kustomisasiNama1').empty();
-                        $('#kustomisasiEmote1').empty();
+    console.log('c: ' + localStorage.getItem('surveys_isSubmitted'));
+    if (localStorage.getItem('surveys_isSubmitted') == 1) {
+        // getCache('responden_id', function (responden_id) {
+        $.ajax({
+            url: window.location.origin + '/getResponden',
+            type: 'GET',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                id: localStorage.getItem('surveys_responden_id')
+            },
+            beforeSend: function () {
+                $('#showSurvey').hide();
+                $('#surveyDone').removeClass('animate__animated animate__fadeOut animate__faster').addClass('animate__animated animate__fadeIn');
+                $('#surveyDone').show();
+            },
+            success: function (response) {
+                $('#kustomisasiNama1').empty();
+                $('#kustomisasiEmote1').empty();
 
-                        $('#kustomisasiNama1').html(response.data.nama);
-                        $('#kustomisasiEmote1').html(getEmote(response.data.emote));
+                $('#kustomisasiNama1').html(response.data.nama);
+                $('#kustomisasiEmote1').html(getEmote(response.data.emote));
 
 
-                        getCache('failedEmail', function (failedEmail) {
-                            if (failedEmail != '') {
-                                $('#emailFailedCard').show();
-                            } else {
-                                $('#emailFailedCard').hide();
-                            }
-                        });
+                // getCache('failedEmail', function (failedEmail) {
+                if (localStorage.getItem('surveys_failedEmail') != '' && localStorage.getItem('surveys_failedEmail') != null) {
+                    $('#emailFailedCard').show();
+                } else {
+                    $('#emailFailedCard').hide();
+                }
+                // });
 
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.error('AJAX Error:', textStatus, errorThrown);
-                    }
-                });
-            });
-        } else {
-            $('#surveyDone').hide();
-            $('#showSurvey').removeClass('animate__animated animate__fadeOut animate__faster').addClass('animate__animated animate__fadeIn');
-            $('#showSurvey').show();
-        }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error('AJAX Error:', textStatus, errorThrown);
+            }
+        });
+        // });
+    } else {
+        $('#surveyDone').hide();
+        $('#showSurvey').removeClass('animate__animated animate__fadeOut animate__faster').addClass('animate__animated animate__fadeIn');
+        $('#showSurvey').show();
+    }
 
-    });
+    // });
 
 }
 showSurvey();
@@ -108,14 +108,14 @@ function respondenLoop() {
             const count = response.count;
             console.log('responden: ' + status);
             $('#respondenLoop').empty();
-            if(count == 0){
+            if (count == 0) {
                 var emoteTrue = getEmote(2);
                 $('#respondenLoop').append('<tr>\
                 <td> <i class="fa-solid fa-user"></i> </td>\
                 <td class="text-center"> Belum ada responden, jadilah yang pertama! </td>\
                 <td> '+ emoteTrue + ' </td>\
                 </tr>');
-            }else{
+            } else {
                 $.each(datas, function (index, item) {
                     var emoteTrue = getEmote(item.emote);
                     $('#respondenLoop').append('<tr>\
@@ -132,22 +132,22 @@ function respondenLoop() {
 respondenLoop();
 
 $('#resentEmailBtn').on('click', function () {
-    getCache('responden_id', function (responden_id) {
-        $('#respondenIdHidden').val('');
-        $('#respondenIdHidden').val(responden_id);
-    });
-    getCache('failedEmail', function (failedEmail) {
-        $('#failedEmailHidden').val('');
-        $('#failedEmailHidden').val(failedEmail);
-    });
+    // getCache('responden_id', function (responden_id) {
+    //     $('#respondenIdHidden').val('');
+    //     $('#respondenIdHidden').val(responden_id);
+    // });
+    // getCache('failedEmail', function (failedEmail) {
+    //     $('#failedEmailHidden').val('');
+    //     $('#failedEmailHidden').val(failedEmail);
+    // });
 
     $.ajax({
         url: window.location.origin + '/sendEmail',
         type: 'POST',
         data: {
             _token: $('meta[name="csrf-token"]').attr('content'),
-            responden_id: $('#respondenIdHidden').val(),
-            email: $('#failedEmailHidden').val(),
+            responden_id: localStorage.getItem('surveys_responden_id'),
+            email: localStorage.getItem('surveys_failedEmail'),
             nama: $('#kustomisasiNama1').html()
         },
         beforeSend: function () {
@@ -193,24 +193,28 @@ $('#resentEmailBtn').on('click', function () {
 });
 
 $('#fillSurveyAgainBtn').on('click', function () {
-    $.get({
-        url: window.location.origin + '/fillAgain',
-        success: function (response) {
-            if (response.status == 'ok') {
-                showSurvey();
-                $('#resetSurveyBtn').click();
-                console.log('cleared');
-            } else {
-                Swal.fire({
-                    icon: "error",
-                    title: "Error",
-                    text: "Please contact the developer! \n" +
-                        "Error code: " + response.status,
-                    footer: '<a href="https://www.instagram.com/resaka.xmp" target="_blank">Go to dev social media</a>'
-                });
-            }
-        }
-    })
+    // $.get({
+    //     url: window.location.origin + '/fillAgain',
+    //     success: function (response) {
+    //         if (response.status == 'ok') {
+
+    //         } else {
+    //             Swal.fire({
+    //                 icon: "error",
+    //                 title: "Error",
+    //                 text: "Please contact the developer! \n" +
+    //                     "Error code: " + response.status,
+    //                 footer: '<a href="https://www.instagram.com/resaka.xmp" target="_blank">Go to dev social media</a>'
+    //             });
+    //         }
+    //     }
+    // })
+    localStorage.removeItem('surveys_isSubmitted');
+    localStorage.removeItem('surveys_responden_id');
+    localStorage.removeItem('surveys_failedEmail');
+    console.log('cleared');
+    $('#resetSurveyBtn').click();
+    showSurvey();
 });
 
 $('#tutupBtn').on('click', function () {
@@ -529,6 +533,9 @@ $(document).ready(function () {
                 console.log(status);
                 if (status == 'ok') {
 
+                    localStorage.setItem('surveys_isSubmitted', '1');
+                    localStorage.setItem('surveys_responden_id', response.responden_id);
+
                     $('#kustomisasiNama').html('');
                     $('#kustomisasiNama').html(response.nama);
 
@@ -629,6 +636,14 @@ $(document).ready(function () {
                 console.log(status + '-' + email);
 
                 if (status == 'ok') {
+
+                    if (email == 'email success') {
+                        localStorage.removeItem('surveys_failedEmail');
+                    } else {
+                        localStorage.setItem('surveys_failedEmail', emailK);
+                        console.log('Item Set: failedEmail');
+                    }
+
                     const toast = document.getElementById('toast-successSelesai');
                     const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
                     toastBootstrap.show();
