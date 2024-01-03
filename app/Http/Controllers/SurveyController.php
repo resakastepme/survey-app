@@ -165,6 +165,10 @@ class SurveyController extends Controller
                         'emote' => $emote,
                         'agree_sent_email' => 1
                     ]);
+                    Logs::create([
+                        'code' => 'email-sent',
+                        'message' => 'name: ' . $nama . ' & sent to: ' . $email
+                    ]);
                     $template = file_get_contents(resource_path('views/template/email.php'));
                     $template = str_replace("{{nama}}", $nama, $template);
                     $emailResult = $this->doEmail($email, $template);

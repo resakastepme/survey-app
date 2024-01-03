@@ -116,7 +116,7 @@ function respondenLoop() {
                 <td> <i class="fa-solid fa-user"></i> </td>\
                 <td class="text-center"> Belum ada responden, jadilah yang pertama! </td>\
                 <td> '+ emoteTrue + ' </td>\
-                </tr>');
+                 </tr>');
             } else {
                 $.each(datas, function (index, item) {
                     var emoteTrue = getEmote(item.emote);
