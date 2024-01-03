@@ -71,9 +71,11 @@ function showSurvey() {
 
                 // getCache('failedEmail', function (failedEmail) {
                 if (localStorage.getItem('surveys_failedEmail') != '' && localStorage.getItem('surveys_failedEmail') != null) {
+                    $('#emailSuccessCard').hide();
                     $('#emailFailedCard').show();
                 } else {
                     $('#emailFailedCard').hide();
+                    $('#emailSuccessCard').show();
                 }
                 // });
 

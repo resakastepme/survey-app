@@ -81,10 +81,17 @@
                                             </table>
                                         </div>
                                     </div>
+                                    <div class="card shadow rounded border-0 bg-success mt-3 ms-3" id="emailSuccessCard"
+                                        style="display: none;">
+                                        <div class="card-body">
+                                            <h3 class="kanit-style"> <i class="fa-solid fa-envelope fa-xl d-none"></i> Email berhasil terkirim! </h3>
+                                            <p> Periksa juga folder spam mu ya! </p>
+                                        </div>
+                                    </div>
                                     <div class="card shadow rounded border-0 bg-danger mt-3 ms-3" id="emailFailedCard"
                                         style="display: none;">
                                         <div class="card-body">
-                                            <h3 class="kanit-style"> Email mu gagal terkirim! </h3>
+                                            <h3 class="kanit-style">  Email mu gagal terkirim! </h3>
                                             <input type="hidden" id="failedEmailHidden">
                                             <input type="hidden" id="respondenIdHidden">
                                             <button type="button" class="btn btn-secondary" id="resentEmailBtn"> <i
