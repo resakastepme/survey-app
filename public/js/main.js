@@ -68,13 +68,19 @@ function showSurvey() {
                 $('#kustomisasiNama1').html(response.data.nama);
                 $('#kustomisasiEmote1').html(getEmote(response.data.emote));
 
+                $('#emailSuccessCard').hide();
+                $('#emailFailedCard').hide();
 
                 // getCache('failedEmail', function (failedEmail) {
                 if (localStorage.getItem('surveys_failedEmail') != '' && localStorage.getItem('surveys_failedEmail') != null) {
-                    $('#emailSuccessCard').hide();
+                    $('#emailNotReadOnly').val('');
+                    $('#emailNotReadOnly').val(localStorage.getItem('surveys_failedEmail'));
                     $('#emailFailedCard').show();
-                } else {
-                    $('#emailFailedCard').hide();
+                }
+
+                if (localStorage.getItem('surveys_kustomisasi_email') != '' && localStorage.getItem('surveys_kustomisasi_email') != null) {
+                    $('#emailReadOnly').val('');
+                    $('#emailReadOnly').val(localStorage.getItem('surveys_kustomisasi_email'));
                     $('#emailSuccessCard').show();
                 }
                 // });
@@ -133,7 +139,7 @@ function respondenLoop() {
 }
 respondenLoop();
 
-$('#resentEmailBtn').on('click', function () {
+$('#formResentEmail').on('submit', function (e) {
     // getCache('responden_id', function (responden_id) {
     //     $('#respondenIdHidden').val('');
     //     $('#respondenIdHidden').val(responden_id);
@@ -142,15 +148,17 @@ $('#resentEmailBtn').on('click', function () {
     //     $('#failedEmailHidden').val('');
     //     $('#failedEmailHidden').val(failedEmail);
     // });
-
+    e.preventDefault();
     $.ajax({
         url: window.location.origin + '/sendEmail',
         type: 'POST',
         data: {
             _token: $('meta[name="csrf-token"]').attr('content'),
             responden_id: localStorage.getItem('surveys_responden_id'),
-            email: localStorage.getItem('surveys_failedEmail'),
-            nama: $('#kustomisasiNama1').html()
+            email: $('#emailNotReadOnly').val(),
+            nama: $('#kustomisasiNama1').html(),
+            emote: localStorage.getItem('surveys_responden_emote')
+
         },
         beforeSend: function () {
             $('#resentEmailBtn').prop('disabled', true);
@@ -161,26 +169,39 @@ $('#resentEmailBtn').on('click', function () {
             const email = response.email;
             console.log(status + '-' + email);
 
-            if (status == 'ok') {
-                const toast = document.getElementById('toast-successSelesai');
-                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
-                toastBootstrap.show();
-                showSurvey();
+            // if (status == 'ok') {
+
+            if (email == 'email success') {
+                localStorage.removeItem('surveys_failedEmail');
+                localStorage.setItem('surveys_kustomisasi_email', $('#emailNotReadOnly').val());
+            } else if (email == 'email not success') {
+                localStorage.removeItem('surveys_kustomisasi_email');
+                localStorage.setItem('surveys_failedEmail', $('#emailNotReadOnly').val());
+                console.log('Item Set: failedEmail');
             } else {
-                Swal.fire({
-                    icon: "error",
-                    title: "Error",
-                    text: "Please contact the developer! \n" +
-                        "Ajax handling Error, this can't be done ",
-                    footer: '<a href="https://www.instagram.com/resaka.xmp" target="_blank">Go to dev social media</a>'
-                });
+                localStorage.removeItem('surveys_failedEmail');
+                localStorage.removeItem('surveys_kustomisasi_email');
             }
+
+            const toast = document.getElementById('toast-successSelesai');
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
+            toastBootstrap.show();
+            // } else {
+            //     Swal.fire({
+            //         icon: "error",
+            //         title: "Error",
+            //         text: "Please contact the developer! \n" +
+            //             "Ajax handling Error, this can't be done ",
+            //         footer: '<a href="https://www.instagram.com/resaka.xmp" target="_blank">Go to dev social media</a>'
+            //     });
+            // }
 
         },
         complete: function () {
             $('#resentEmailBtn').prop('disabled', false);
             $('#resentEmailSpinner').hide();
             showSurvey();
+            respondenLoop();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             Swal.fire({
@@ -214,6 +235,8 @@ $('#fillSurveyAgainBtn').on('click', function () {
     localStorage.removeItem('surveys_isSubmitted');
     localStorage.removeItem('surveys_responden_id');
     localStorage.removeItem('surveys_failedEmail');
+    localStorage.removeItem('surveys_kustomisasi_email');
+    localStorage.removeItem('surveys_responden_emote');
     console.log('cleared');
     $('#resetSurveyBtn').click();
     showSurvey();
@@ -637,51 +660,58 @@ $(document).ready(function () {
                 const email = response.email;
                 console.log(status + '-' + email);
 
-                if (status == 'ok') {
+                // if (status == 'ok') {
 
-                    if (email == 'email success') {
-                        localStorage.removeItem('surveys_failedEmail');
-                    } else {
-                        localStorage.setItem('surveys_failedEmail', emailK);
-                        console.log('Item Set: failedEmail');
-                    }
-
-                    const toast = document.getElementById('toast-successSelesai');
-                    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
-                    toastBootstrap.show();
-
-                    // $('#kustomisasiNama1').empty();
-                    // $('#kustomisasiEmote1').empty();
-
-                    // $('#kustomisasiNama1').html(namaK);
-                    // $('#kustomisasiEmote1').html(getEmote(emote));
-
-                    // if (emailFailed != '') {
-                    //     $('#emailFailedCard').show();
-                    // } else {
-                    //     $('#emailFailedCard').hide();
-                    // }
-
-                    // $('#showSurvey').hide();
-                    // $('#surveyDone').removeClass('animate__animated animate__fadeOut animate__faster').addClass('animate__animated animate__fadeIn');
-                    // setTimeout(function () {
-                    //     $('#surveyDone').show();
-                    // }, 300);
-
-                    showSurvey();
-                    respondenLoop();
-
-                    // window.location.href = '/';
-
+                if (email == 'email success') {
+                    localStorage.removeItem('surveys_failedEmail');
+                    localStorage.setItem('surveys_kustomisasi_email', emailK);
+                } else if (email == 'email not success') {
+                    localStorage.removeItem('surveys_kustomisasi_email');
+                    localStorage.setItem('surveys_failedEmail', emailK);
+                    localStorage.setItem('surveys_responden_emote', emote);
+                    console.log('Item Set: failedEmail');
                 } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: "Please contact the developer! \n" +
-                            "Ajax handling Error, this can't be done ",
-                        footer: '<a href="https://www.instagram.com/resaka.xmp" target="_blank">Go to dev social media</a>'
-                    });
+                    localStorage.removeItem('surveys_failedEmail');
+                    localStorage.removeItem('surveys_kustomisasi_email');
+                    localStorage.removeItem('surveys_responden_emote');
                 }
+
+                const toast = document.getElementById('toast-successSelesai');
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
+                toastBootstrap.show();
+
+                // $('#kustomisasiNama1').empty();
+                // $('#kustomisasiEmote1').empty();
+
+                // $('#kustomisasiNama1').html(namaK);
+                // $('#kustomisasiEmote1').html(getEmote(emote));
+
+                // if (emailFailed != '') {
+                //     $('#emailFailedCard').show();
+                // } else {
+                //     $('#emailFailedCard').hide();
+                // }
+
+                // $('#showSurvey').hide();
+                // $('#surveyDone').removeClass('animate__animated animate__fadeOut animate__faster').addClass('animate__animated animate__fadeIn');
+                // setTimeout(function () {
+                //     $('#surveyDone').show();
+                // }, 300);
+
+                showSurvey();
+                respondenLoop();
+
+                // window.location.href = '/';
+
+                // } else {
+                //     Swal.fire({
+                //         icon: "error",
+                //         title: "Error",
+                //         text: "Please contact the developer! \n" +
+                //             "Ajax handling Error, this can't be done ",
+                //         footer: '<a href="https://www.instagram.com/resaka.xmp" target="_blank">Go to dev social media</a>'
+                //     });
+                // }
 
             },
             complete: function () {

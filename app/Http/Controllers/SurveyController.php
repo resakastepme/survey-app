@@ -187,7 +187,7 @@ class SurveyController extends Controller
             ];
             Logs::create($log);
             return response()->json([
-                'status' => 'not ok',
+                'status' => 'ok',
                 'code' => $unique,
                 'email' => 'email not success'
             ]);

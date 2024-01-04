@@ -83,20 +83,26 @@
                                     </div>
                                     <div class="card shadow rounded border-0 bg-success mt-3 ms-3" id="emailSuccessCard"
                                         style="display: none;">
-                                        <div class="card-body">
-                                            <h3 class="kanit-style"> <i class="fa-solid fa-envelope fa-xl d-none"></i> Email berhasil terkirim! </h3>
+                                        <div class="card-body" style="color: white;">
+                                            <h3 class="kanit-style"> <i class="fa-solid fa-envelope fa-xl d-none"></i> Email
+                                                berhasil terkirim! </h3>
+                                            <input type="email" class="form-control" id="emailReadOnly" disabled>
                                             <p> Periksa juga folder spam mu ya! </p>
                                         </div>
                                     </div>
                                     <div class="card shadow rounded border-0 bg-danger mt-3 ms-3" id="emailFailedCard"
                                         style="display: none;">
                                         <div class="card-body">
-                                            <h3 class="kanit-style">  Email mu gagal terkirim! </h3>
+                                            <h3 class="kanit-style"> Email mu gagal terkirim! </h3>
                                             <input type="hidden" id="failedEmailHidden">
                                             <input type="hidden" id="respondenIdHidden">
-                                            <button type="button" class="btn btn-secondary" id="resentEmailBtn"> <i
-                                                    class="spinner-border spinner-border-sm" id="resentEmailSpinner"
-                                                    style="display: none;"></i> Coba lagi </button>
+                                            <form id="formResentEmail">
+                                                <input type="email" class="form-control" id="emailNotReadOnly">
+                                                <button class="btn btn-secondary mt-2" type="submit"
+                                                    id="resentEmailBtn"> <i class="spinner-border spinner-border-sm"
+                                                        id="resentEmailSpinner" style="display: none;"></i> Coba lagi
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
 
