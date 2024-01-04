@@ -15,7 +15,12 @@
             <div class="col-md-4">
                 <div class="card shadow rounded border-0 mt-2" style="background-color: rgb(231, 225, 225)">
                     <div class="card-body">
-                        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+                        <canvas id="menggunakan_email_chart" height="220" style="width:100%;max-width:700px"></canvas>
+                    </div>
+                </div>
+                <div class="card shadow rounded border-0 mt-3" style="background-color: rgb(231, 225, 225);">
+                    <div class="card-body">
+                        <canvas id="mengalami_chart" height="250" style="width:100%;max-width:700px;height:200%"></canvas>
                     </div>
                 </div>
             </div>
@@ -372,25 +377,54 @@
     <script type="text/javascript">
         $(':input').prop('disabled', true);
 
-        var values = '{{ $values->getResult->platform_email }}';
-        console.log(values);
+        const menggunakan_email1 = '{{ $menggunakan_email1 }}';
+        const menggunakan_email2 = '{{ $menggunakan_email2 }}';
+        const menggunakan_email3 = '{{ $menggunakan_email3 }}';
+        const menggunakan_email4 = '{{ $menggunakan_email4 }}';
+        const menggunakan_email5 = '{{ $menggunakan_email5 }}';
 
-        var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-        var yValues = [55, 49, 44, 24, 15];
-        var barColors = ["red", "green", "blue", "orange", "brown"];
-        new Chart("myChart", {
+        const mengalami1 = '{{ $mengalami1 }}';
+        const mengalami2 = '{{ $mengalami2 }}';
+        const mengalami3 = '{{ $mengalami3 }}';
+        const mengalami4 = '{{ $mengalami4 }}';
+        const mengalami5 = '{{ $mengalami5 }}';
+
+        var xValues_menggunakan_email = ["Setiap Hari", "Beberapa Kali dalam Seminggu", "Sekitar Sekali Seminggu", "Sekitar Sekali Sebulan", "Jarang Sekali atau Tidak Pernah"];
+        var yValues_menggunakan_email = [menggunakan_email1, menggunakan_email2, menggunakan_email3, menggunakan_email4, menggunakan_email5];
+        var barColors_menggunakan_email = ["red", "green", "blue", "orange", "brown"];
+        new Chart("menggunakan_email_chart", {
             type: "pie",
             data: {
-                labels: xValues,
+                labels: xValues_menggunakan_email,
                 datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
+                    backgroundColor: barColors_menggunakan_email,
+                    data: yValues_menggunakan_email
                 }]
             },
             options: {
                 title: {
                     display: true,
-                    text: "World Wide Wine Production"
+                    text: "Seberapa sering Anda menggunakan email untuk keperluan pribadi atau pekerjaan?"
+                }
+            }
+        });
+
+        var xValues_mengalami = ["Ya, Saya Pernah Mengalami", "Tidak, Saya Tidak Pernah Mengalami", "Tidak Yakin", "Mungkin, Tetapi Saya Tidak Yakin", "Tidak Ingin Mengungkapkan"];
+        var yValues_mengalami = [mengalami1, mengalami2, mengalami3, mengalami4, mengalami5];
+        var barColors_mengalami = ["red", "green", "blue", "orange", "brown"];
+        new Chart("mengalami_chart", {
+            type: "pie",
+            data: {
+                labels: xValues_mengalami,
+                datasets: [{
+                    backgroundColor: barColors_mengalami,
+                    data: yValues_mengalami
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Apakah Anda pernah mengalami atau menyadari adanya upaya penipuan melalui email?"
                 }
             }
         });
