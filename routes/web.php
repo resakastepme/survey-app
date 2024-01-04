@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SurveyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,14 @@ Route::get('/getResponden', [SurveyController::class, 'getResponden']);
 Route::get('/getRespondens', [SurveyController::class, 'getRespondens']);
 Route::get('/fillAgain', [SurveyController::class, 'fillAgain']);
 Route::get('/cache', [SurveyController::class, 'cache']);
+
+// ADMIN ROUTE
+Route::prefix('/adminPlace')->group(function () {
+    Route::get('/create-acc', [AuthController::class, 'create']);
+    Route::get('/', [AuthController::class, 'index']);
+    Route::post('/auth', [AuthController::class, 'auth']);
+    Route::get('/home', [AuthController::class, 'home']);
+});
 
 // CHECK ROUTE
 Route::get('/check', function () {
