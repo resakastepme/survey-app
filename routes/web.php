@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SurveyController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +17,20 @@ use App\Http\Controllers\SurveyController;
 
 //STORAGE:LINK ROUTE
 Route::get('/generate', function () {
-    \Illuminate\Support\Facades\Artisan::call('storage:link');
+    Artisan::call('storage:link');
     echo 'ok';
+});
+
+// ROUTE TO MAINTENANCE MODE
+Route::get('/maintenance-mode', function () {
+    Artisan::call('down');
+    return 'Maintenance mode is enabled';
+});
+
+// ROUTE TO DISABLE MAINTENANCE MODE
+Route::get('/disable-maintenance-mode', function () {
+    Artisan::call('up');
+    return 'Maintenance mode is disabled';
 });
 
 Route::get('/', function () {
