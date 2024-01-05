@@ -23,6 +23,46 @@
                         <canvas id="mengalami_chart" height="250" style="width:100%;max-width:700px;height:200%"></canvas>
                     </div>
                 </div>
+                <div class="card shadow rounded border-0 mt-3" style="background-color: rgb(231, 225, 225);">
+                    <div class="card-body">
+                        <canvas id="kesadaran_chart" height="230" style="width:100%;max-width:700px;height:200%"></canvas>
+                    </div>
+                </div>
+                <div class="card shadow rounded border-0 mt-3" style="background-color: rgb(231, 225, 225);">
+                    <div class="card-body">
+                        <canvas id="korban_chart" height="250" style="width:100%;max-width:700px;height:200%"></canvas>
+                    </div>
+                </div>
+                <div class="card shadow rounded border-0 mt-3" style="background-color: rgb(231, 225, 225);">
+                    <div class="card-body">
+                        <canvas id="pengguna_extension_chart" height="220" style="width:100%;max-width:700px;height:200%"></canvas>
+                    </div>
+                </div>
+                <div class="card shadow rounded border-0 mt-3" style="background-color: rgb(231, 225, 225);">
+                    <div class="card-body">
+                        <canvas id="deteksi_email_chart" height="220" style="width:100%;max-width:700px;height:200%"></canvas>
+                    </div>
+                </div>
+                <div class="card shadow rounded border-0 mt-3" style="background-color: rgb(231, 225, 225);">
+                    <div class="card-body">
+                        <canvas id="mempertimbangkan_chart" height="220" style="width:100%;max-width:700px;height:200%"></canvas>
+                    </div>
+                </div>
+                <div class="card shadow rounded border-0 mt-3" style="background-color: rgb(231, 225, 225);">
+                    <div class="card-body">
+                        <canvas id="fitur_utama_chart" height="220" style="width:100%;max-width:700px;height:200%"></canvas>
+                    </div>
+                </div>
+                <div class="card shadow rounded border-0 mt-3" style="background-color: rgb(231, 225, 225);">
+                    <div class="card-body">
+                        <canvas id="seberapa_nyaman_chart" height="220" style="width:100%;max-width:700px;height:200%"></canvas>
+                    </div>
+                </div>
+                <div class="card shadow rounded border-0 mt-3" style="background-color: rgb(231, 225, 225);">
+                    <div class="card-body">
+                        <canvas id="platform_email_chart" height="220" style="width:100%;max-width:700px;height:200%"></canvas>
+                    </div>
+                </div>
             </div>
             <div class="col-md-8">
 
@@ -383,12 +423,6 @@
         const menggunakan_email4 = '{{ $menggunakan_email4 }}';
         const menggunakan_email5 = '{{ $menggunakan_email5 }}';
 
-        const mengalami1 = '{{ $mengalami1 }}';
-        const mengalami2 = '{{ $mengalami2 }}';
-        const mengalami3 = '{{ $mengalami3 }}';
-        const mengalami4 = '{{ $mengalami4 }}';
-        const mengalami5 = '{{ $mengalami5 }}';
-
         var xValues_menggunakan_email = ["Setiap Hari", "Beberapa Kali dalam Seminggu", "Sekitar Sekali Seminggu", "Sekitar Sekali Sebulan", "Jarang Sekali atau Tidak Pernah"];
         var yValues_menggunakan_email = [menggunakan_email1, menggunakan_email2, menggunakan_email3, menggunakan_email4, menggunakan_email5];
         var barColors_menggunakan_email = ["red", "green", "blue", "orange", "brown"];
@@ -409,6 +443,12 @@
             }
         });
 
+        const mengalami1 = '{{ $mengalami1 }}';
+        const mengalami2 = '{{ $mengalami2 }}';
+        const mengalami3 = '{{ $mengalami3 }}';
+        const mengalami4 = '{{ $mengalami4 }}';
+        const mengalami5 = '{{ $mengalami5 }}';
+
         var xValues_mengalami = ["Ya, Saya Pernah Mengalami", "Tidak, Saya Tidak Pernah Mengalami", "Tidak Yakin", "Mungkin, Tetapi Saya Tidak Yakin", "Tidak Ingin Mengungkapkan"];
         var yValues_mengalami = [mengalami1, mengalami2, mengalami3, mengalami4, mengalami5];
         var barColors_mengalami = ["red", "green", "blue", "orange", "brown"];
@@ -425,6 +465,211 @@
                 title: {
                     display: true,
                     text: "Apakah Anda pernah mengalami atau menyadari adanya upaya penipuan melalui email?"
+                }
+            }
+        });
+
+        const kesadaran1 = '{{ $kesadaran1 }}';
+        const kesadaran2 = '{{ $kesadaran2 }}';
+        const kesadaran3 = '{{ $kesadaran3 }}';
+        const kesadaran4 = '{{ $kesadaran4 }}';
+        const kesadaran5 = '{{ $kesadaran5 }}';
+
+        var xValues_kesadaran = ["Sangat Sadar", "Cukup Sadar", "Kurang Sadar", "Sama Sekali Tidak Sadar", "Tidak Yakin"];
+        var yValues_kesadaran = [kesadaran1, kesadaran2, kesadaran3, kesadaran4, kesadaran5];
+        var barColors_kesadaran = ["red", "green", "blue", "orange", "brown"];
+        new Chart("kesadaran_chart", {
+            type: "pie",
+            data: {
+                labels: xValues_kesadaran,
+                datasets: [{
+                    backgroundColor: barColors_kesadaran,
+                    data: yValues_kesadaran
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Seberapa sadar Anda terhadap potensi risiko keamanan email, seperti phishing atau penipuan email?"
+                }
+            }
+        });
+
+        const korban1 = '{{ $korban1 }}';
+        const korban2 = '{{ $korban2 }}';
+        const korban3 = '{{ $korban3 }}';
+        const korban4 = '{{ $korban4 }}';
+        const korban5 = '{{ $korban5 }}';
+
+        var xValues_korban = ["Ya, Saya Pernah Menjadi Korban", "Tidak, Saya Belum Pernah Menjadi Korban", "Tidak Yakin", "Mungkin, Tetapi Saya Tidak Yakin", "Tidak Ingin Mengungkapkan"];
+        var yValues_korban = [korban1, korban2, korban3, korban4, korban5];
+        var barColors_korban = ["red", "green", "blue", "orange", "brown"];
+        new Chart("korban_chart", {
+            type: "pie",
+            data: {
+                labels: xValues_korban,
+                datasets: [{
+                    backgroundColor: barColors_korban,
+                    data: yValues_korban
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Apakah Anda pernah menjadi korban penipuan email atau keamanan email yang buruk?"
+                }
+            }
+        });
+
+        const pengguna_extension1 = '{{ $pengguna_extension1 }}';
+        const pengguna_extension2 = '{{ $pengguna_extension2 }}';
+
+        var xValues_pengguna_extension = ["Ya, Saya Pernah", "Tidak, Saya Belum Pernah"];
+        var yValues_pengguna_extension = [pengguna_extension1, pengguna_extension2];
+        var barColors_pengguna_extension = ["red", "green"];
+        new Chart("pengguna_extension_chart", {
+            type: "pie",
+            data: {
+                labels: xValues_pengguna_extension,
+                datasets: [{
+                    backgroundColor: barColors_pengguna_extension,
+                    data: yValues_pengguna_extension
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Apakah Anda pernah menggunakan atau menginstall aplikasi Chrome Extension sebelumnya?"
+                }
+            }
+        });
+
+        const deteksi_email1 = '{{ $deteksi_email1 }}';
+        const deteksi_email2 = '{{ $deteksi_email2 }}';
+        const deteksi_email3 = '{{ $deteksi_email3 }}';
+        const deteksi_email4 = '{{ $deteksi_email4 }}';
+        const deteksi_email5 = '{{ $deteksi_email5 }}';
+
+        var xValues_deteksi_email = ["Sangat Penting", "Penting", "Netral", "Tidak Terlalu Penting", "Tidak Penting Sama Sekali"];
+        var yValues_deteksi_email = [deteksi_email1, deteksi_email2, deteksi_email3, deteksi_email4, deteksi_email5];
+        var barColors_deteksi_email = ["red", "green", "blue", "orange", "brown"];
+        new Chart("deteksi_email_chart", {
+            type: "pie",
+            data: {
+                labels: xValues_deteksi_email,
+                datasets: [{
+                    backgroundColor: barColors_deteksi_email,
+                    data: yValues_deteksi_email
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Apakah Anda berpikir bahwa deteksi email penipuan adalah hal yang penting untuk keamanan email Anda?"
+                }
+            }
+        });
+
+        const mempertimbangkan1 = '{{ $mempertimbangkan1 }}';
+        const mempertimbangkan2 = '{{ $mempertimbangkan2 }}';
+        const mempertimbangkan3 = '{{ $mempertimbangkan3 }}';
+        const mempertimbangkan4 = '{{ $mempertimbangkan4 }}';
+        const mempertimbangkan5 = '{{ $mempertimbangkan5 }}';
+
+        var xValues_mempertimbangkan = ["Ya, Saya Sedang Menggunakan Alat atau Layanan Tersebut", "Belum, Tetapi Saya Mempertimbangkan", "Tidak Pernah Memikirkan", "Tidak Tahu", "Tidak Ingin Menggunakan"];
+        var yValues_mempertimbangkan = [mempertimbangkan1, mempertimbangkan2, mempertimbangkan3, mempertimbangkan4, mempertimbangkan5];
+        var barColors_mempertimbangkan = ["red", "green", "blue", "orange", "brown"];
+        new Chart("mempertimbangkan_chart", {
+            type: "pie",
+            data: {
+                labels: xValues_mempertimbangkan,
+                datasets: [{
+                    backgroundColor: barColors_mempertimbangkan,
+                    data: yValues_mempertimbangkan
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Apakah Anda saat ini menggunakan atau mempertimbangkan menggunakan alat atau layanan untuk melindungi diri dari penipuan email?"
+                }
+            }
+        });
+
+        const fitur_utama1 = '{{ $fitur_utama1 }}';
+        const fitur_utama2 = '{{ $fitur_utama2 }}';
+        const fitur_utama3 = '{{ $fitur_utama3 }}';
+        const fitur_utama4 = '{{ $fitur_utama4 }}';
+        const fitur_utama5 = '{{ $fitur_utama5 }}';
+        const fitur_utama6 = '{{ $fitur_utama6 }}';
+
+        var xValues_fitur_utama = ["Scan Email Otomatis", "Peringatan Langsung", "Integrasi Mudah", "Analisis Tautan dan Lampiran", "Pembaruan Berkala", "Panduan Keamanan"];
+        var yValues_fitur_utama = [fitur_utama1, fitur_utama2, fitur_utama3, fitur_utama4, fitur_utama5, fitur_utama6];
+        var barColors_fitur_utama = ["red", "green", "blue", "orange", "brown", "purple"];
+        new Chart("fitur_utama_chart", {
+            type: "pie",
+            data: {
+                labels: xValues_fitur_utama,
+                datasets: [{
+                    backgroundColor: barColors_fitur_utama,
+                    data: yValues_fitur_utama
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Apa yang menurut Anda menjadi fitur utama yang harus dimiliki oleh aplikasi deteksi email penipuan agar dapat membantu Anda secara efektif?"
+                }
+            }
+        });
+
+        const seberapa_nyaman1 = '{{ $seberapa_nyaman1 }}';
+        const seberapa_nyaman2 = '{{ $seberapa_nyaman2 }}';
+        const seberapa_nyaman3 = '{{ $seberapa_nyaman3 }}';
+        const seberapa_nyaman4 = '{{ $seberapa_nyaman4 }}';
+        const seberapa_nyaman5 = '{{ $seberapa_nyaman5 }}';
+
+        var xValues_seberapa_nyaman = ["Sangat Nyaman", "Nyaman", "Netral", "Tidak Nyaman", "Tidak Suka"];
+        var yValues_seberapa_nyaman = [seberapa_nyaman1, seberapa_nyaman2, seberapa_nyaman3, seberapa_nyaman4, seberapa_nyaman5];
+        var barColors_seberapa_nyaman = ["red", "green", "blue", "orange", "brown"];
+        new Chart("seberapa_nyaman_chart", {
+            type: "pie",
+            data: {
+                labels: xValues_seberapa_nyaman,
+                datasets: [{
+                    backgroundColor: barColors_seberapa_nyaman,
+                    data: yValues_seberapa_nyaman
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Seberapa nyaman Anda dengan ide menggunakan aplikasi Chrome Extension untuk melindungi email Anda?"
+                }
+            }
+        });
+
+        const platform_email1 = '{{ $platform_email1 }}';
+        const platform_email2 = '{{ $platform_email2 }}';
+        const platform_email3 = '{{ $platform_email3 }}';
+        const platform_email4 = '{{ $platform_email4 }}';
+
+        var xValues_platform_email = ["RoundCube", "Gmail", "Yahoo Mail", "Apple Mail"];
+        var yValues_platform_email = [platform_email1, platform_email2, platform_email3, platform_email4];
+        var barColors_platform_email = ["red", "green", "blue", "orange"];
+        new Chart("platform_email_chart", {
+            type: "pie",
+            data: {
+                labels: xValues_platform_email,
+                datasets: [{
+                    backgroundColor: barColors_platform_email,
+                    data: yValues_platform_email
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Dari beberapa Platform Pengelola Email dibawah ini, manakah yang anda gunakan?"
                 }
             }
         });

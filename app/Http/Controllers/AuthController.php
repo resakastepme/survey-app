@@ -110,13 +110,13 @@ class AuthController extends Controller
         $kesadaran1 = Results::where('kesadaran', 'Sangat Sadar')->count();
         $kesadaran2 = Results::where('kesadaran', 'Cukup Sadar')->count();
         $kesadaran3 = Results::where('kesadaran', 'Kurang Sadar')->count();
-        $kesadaran4 = Results::where('kesadaran', 'Sama Sekali')->count();
+        $kesadaran4 = Results::where('kesadaran', 'Sama Sekali Tidak Sadar')->count();
         $kesadaran5 = Results::where('kesadaran', 'Tidak Yakin')->count();
 
         $korban1 = Results::where('korban', 'Ya, Saya Pernah Menjadi Korban')->count();
         $korban2 = Results::where('korban', 'Tidak, Saya Belum Pernah Menjadi Korban')->count();
         $korban3 = Results::where('korban', 'Tidak Yakin')->count();
-        $korban4 = Results::where('korban', 'Mungkin, Tetapi Saya Tidak Yakin"')->count();
+        $korban4 = Results::where('korban', 'Mungkin, Tetapi Saya Tidak Yakin')->count();
         $korban5 = Results::where('korban', 'Tidak Ingin Mengungkapkan')->count();
 
         $pengguna_extension1 = Results::where('pengguna_extension', 'Ya, Saya Pernah')->count();
@@ -134,12 +134,12 @@ class AuthController extends Controller
         $mempertimbangkan4 = Results::where('mempertimbangkan', 'Tidak Tahu')->count();
         $mempertimbangkan5 = Results::where('mempertimbangkan', 'Tidak Ingin Menggunakan')->count();
 
-        $fitur_utama1 = Results::where('fitur_utama', 'LIKE', 'Scan Email Otomatis')->count();
-        $fitur_utama2 = Results::where('fitur_utama', 'LIKE', 'Peringatan Langsung')->count();
-        $fitur_utama3 = Results::where('fitur_utama', 'LIKE', 'Integrasi Mudah')->count();
-        $fitur_utama4 = Results::where('fitur_utama', 'LIKE', 'Analisis Tautan dan Lampiran')->count();
-        $fitur_utama5 = Results::where('fitur_utama', 'LIKE', 'Pembaruan Berkala')->count();
-        $fitur_utama6 = Results::where('fitur_utama', 'LIKE', 'Panduan Keamanan')->count();
+        $fitur_utama1 = Results::where('fitur_utama', 'LIKE', '%Scan Email Otomatis%')->count();
+        $fitur_utama2 = Results::where('fitur_utama', 'LIKE', '%Peringatan Langsung%')->count();
+        $fitur_utama3 = Results::where('fitur_utama', 'LIKE', '%Integrasi Mudah%')->count();
+        $fitur_utama4 = Results::where('fitur_utama', 'LIKE', '%Analisis Tautan dan Lampiran%')->count();
+        $fitur_utama5 = Results::where('fitur_utama', 'LIKE', '%Pembaruan Berkala%')->count();
+        $fitur_utama6 = Results::where('fitur_utama', 'LIKE', '%Panduan Keamanan%')->count();
 
         $seberapa_nyaman1 = Results::where('seberapa_nyaman', 'Sangat Nyaman')->count();
         $seberapa_nyaman2 = Results::where('seberapa_nyaman', 'Nyaman')->count();
@@ -147,10 +147,10 @@ class AuthController extends Controller
         $seberapa_nyaman4 = Results::where('seberapa_nyaman', 'Tidak Nyaman')->count();
         $seberapa_nyaman5 = Results::where('seberapa_nyaman', 'Tidak Suka')->count();
 
-        $platform_email1 = Results::where('platform_email', 'LIKE', 'RoundCube')->count();
-        $platform_email2 = Results::where('platform_email', 'LIKE', 'Gmail')->count();
-        $platform_email3 = Results::where('platform_email', 'LIKE', 'Yahoo Mail')->count();
-        $platform_email4 = Results::where('platform_email', 'LIKE', 'Apple Mail')->count();
+        $platform_email1 = Results::where('platform_email', 'LIKE', '%RoundCube%')->count();
+        $platform_email2 = Results::where('platform_email', 'LIKE', '%Gmail%')->count();
+        $platform_email3 = Results::where('platform_email', 'LIKE', '%Yahoo Mail%')->count();
+        $platform_email4 = Results::where('platform_email', 'LIKE', '%Apple Mail%')->count();
         // $platform_email5 = Results::where('platform_email', 'NOT LIKE', 'RoundCube')->where('platform_email', 'NOT LIKE', 'Gmail')->where('platform_email', 'NOT LIKE', 'Yahoo Mail')->where('platform_email', 'NOT LIKE', 'Apple Mail')->count();
         // dd($post);
         return view('admin.home', compact('post'), [
@@ -164,7 +164,44 @@ class AuthController extends Controller
             'mengalami2' => $mengalami2,
             'mengalami3' => $mengalami3,
             'mengalami4' => $mengalami4,
-            'mengalami5' => $mengalami5
+            'mengalami5' => $mengalami5,
+            'kesadaran1' => $kesadaran1,
+            'kesadaran2' => $kesadaran2,
+            'kesadaran3' => $kesadaran3,
+            'kesadaran4' => $kesadaran4,
+            'kesadaran5' => $kesadaran5,
+            'korban1' => $korban1,
+            'korban2' => $korban2,
+            'korban3' => $korban3,
+            'korban4' => $korban4,
+            'korban5' => $korban5,
+            'pengguna_extension1' => $pengguna_extension1,
+            'pengguna_extension2' => $pengguna_extension2,
+            'deteksi_email1' => $deteksi_email1,
+            'deteksi_email2' => $deteksi_email2,
+            'deteksi_email3' => $deteksi_email3,
+            'deteksi_email4' => $deteksi_email4,
+            'deteksi_email5' => $deteksi_email5,
+            'mempertimbangkan1' => $mempertimbangkan1,
+            'mempertimbangkan2' => $mempertimbangkan2,
+            'mempertimbangkan3' => $mempertimbangkan3,
+            'mempertimbangkan4' => $mempertimbangkan4,
+            'mempertimbangkan5' => $mempertimbangkan5,
+            'fitur_utama1' => $fitur_utama1,
+            'fitur_utama2' => $fitur_utama2,
+            'fitur_utama3' => $fitur_utama3,
+            'fitur_utama4' => $fitur_utama4,
+            'fitur_utama5' => $fitur_utama5,
+            'fitur_utama6' => $fitur_utama6,
+            'seberapa_nyaman1' => $seberapa_nyaman1,
+            'seberapa_nyaman2' => $seberapa_nyaman2,
+            'seberapa_nyaman3' => $seberapa_nyaman3,
+            'seberapa_nyaman4' => $seberapa_nyaman4,
+            'seberapa_nyaman5' => $seberapa_nyaman5,
+            'platform_email1' => $platform_email1,
+            'platform_email2' => $platform_email2,
+            'platform_email3' => $platform_email3,
+            'platform_email4' => $platform_email4,
         ]);
     }
 }
