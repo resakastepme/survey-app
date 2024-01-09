@@ -204,4 +204,9 @@ class AuthController extends Controller
             'platform_email4' => $platform_email4,
         ]);
     }
+
+    public function logout() {
+        Session::flush();
+        return redirect()->to('/');
+    }
 }

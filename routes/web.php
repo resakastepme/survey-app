@@ -50,6 +50,7 @@ Route::prefix('/adminPlace')->group(function () {
     Route::get('/', [AuthController::class, 'index']);
     Route::post('/auth', [AuthController::class, 'auth']);
     Route::get('/home', [AuthController::class, 'home']);
+    Route::get('/logout', [AuthController::class, 'logout']);
 });
 
 // CHECK ROUTE
