@@ -388,7 +388,7 @@
                               <div style="font-size: 14px; color: #ffffff; line-height: 140%; text-align: left; word-wrap: break-word;">
                                 <p style="line-height: 140%;"><strong>Sorry to say but, you're cute :3</strong></p>
                                 <p style="line-height: 140%;"><strong>That gif is represent my feeling to you lol</strong></p>
-                                <p style="line-height: 140%;">Happy new year anyway</p>
+                                <p style="line-height: 140%;">Happy new year &amp; happy birthday anyway</p>
                               </div>
 
                             </td>
