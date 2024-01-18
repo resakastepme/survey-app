@@ -5,6 +5,12 @@
         <a class="nav-link active" href="{{ url('/adminPlace/home') }}">Home</a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" id="downloadBtn" href="{{ url('/adminPlace/home') }}">
+            <i class="spinner-border spinner-border-sm" role="status" style="display: none;" id="loadExcel">
+            </i> Download-Excel
+        </a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="{{ url('/adminPlace/logout') }}" style="color: red">logout</a>
     </li>
 @endsection
@@ -35,32 +41,38 @@
                 </div>
                 <div class="card shadow rounded border-0 mt-3" style="background-color: rgb(231, 225, 225);">
                     <div class="card-body">
-                        <canvas id="pengguna_extension_chart" height="220" style="width:100%;max-width:700px;height:200%"></canvas>
+                        <canvas id="pengguna_extension_chart" height="220"
+                            style="width:100%;max-width:700px;height:200%"></canvas>
                     </div>
                 </div>
                 <div class="card shadow rounded border-0 mt-3" style="background-color: rgb(231, 225, 225);">
                     <div class="card-body">
-                        <canvas id="deteksi_email_chart" height="220" style="width:100%;max-width:700px;height:200%"></canvas>
+                        <canvas id="deteksi_email_chart" height="220"
+                            style="width:100%;max-width:700px;height:200%"></canvas>
                     </div>
                 </div>
                 <div class="card shadow rounded border-0 mt-3" style="background-color: rgb(231, 225, 225);">
                     <div class="card-body">
-                        <canvas id="mempertimbangkan_chart" height="220" style="width:100%;max-width:700px;height:200%"></canvas>
+                        <canvas id="mempertimbangkan_chart" height="220"
+                            style="width:100%;max-width:700px;height:200%"></canvas>
                     </div>
                 </div>
                 <div class="card shadow rounded border-0 mt-3" style="background-color: rgb(231, 225, 225);">
                     <div class="card-body">
-                        <canvas id="fitur_utama_chart" height="220" style="width:100%;max-width:700px;height:200%"></canvas>
+                        <canvas id="fitur_utama_chart" height="220"
+                            style="width:100%;max-width:700px;height:200%"></canvas>
                     </div>
                 </div>
                 <div class="card shadow rounded border-0 mt-3" style="background-color: rgb(231, 225, 225);">
                     <div class="card-body">
-                        <canvas id="seberapa_nyaman_chart" height="220" style="width:100%;max-width:700px;height:200%"></canvas>
+                        <canvas id="seberapa_nyaman_chart" height="220"
+                            style="width:100%;max-width:700px;height:200%"></canvas>
                     </div>
                 </div>
                 <div class="card shadow rounded border-0 mt-3" style="background-color: rgb(231, 225, 225);">
                     <div class="card-body">
-                        <canvas id="platform_email_chart" height="220" style="width:100%;max-width:700px;height:200%"></canvas>
+                        <canvas id="platform_email_chart" height="220"
+                            style="width:100%;max-width:700px;height:200%"></canvas>
                     </div>
                 </div>
             </div>
@@ -95,7 +107,8 @@
                                 </input>
 
                                 <label class="mt-2" for="usia">Rentang usia</label>
-                                <input name="usia" id="usia" value="{{ $p->rentang_usia }}" class="form-control">
+                                <input name="usia" id="usia" value="{{ $p->rentang_usia }}"
+                                    class="form-control">
                                 {{-- <option value="null" default>-- Pilih --</option>
                                     <option value="Kurang dari 12 tahun"> Kurang dari 12 tahun </option>
                                     <option value="12 sampai 17 tahun"> 12 sampai 17 tahun </option>
@@ -109,8 +122,9 @@
                                     <div class="col-md-6">
 
                                         <label for="pekerjaan"> Pekerjaan </label>
-                                        <input name="pekerjaan" id="pekerjaan" value="{{ $p->pekerjaan }}" class="form-control">
-                                            {{-- <option value="null" id="pekerjaanDefault" default>-- Pilih --</option>
+                                        <input name="pekerjaan" id="pekerjaan" value="{{ $p->pekerjaan }}"
+                                            class="form-control">
+                                        {{-- <option value="null" id="pekerjaanDefault" default>-- Pilih --</option>
                                             <option value="Mahasiswa" id="pekerjaanDefault">Mahasiswa</option>
                                             <option value="Karyawan Swasta" id="pekerjaanDefault">Karyawan Swasta</option>
                                             <option value="Pengusaha/Entreprenuer" id="pekerjaanDefault">
@@ -140,8 +154,9 @@
                                     <div class="col-md-6">
 
                                         <label for="bidangIndustri">Bidang Industri</label>
-                                        <input name="bidangIndustri" value="{{ $p->bidang_industri }}" id="bidangIndustri" class="form-control">
-                                            {{-- <option value="null" default>-- Pilih --</option>
+                                        <input name="bidangIndustri" value="{{ $p->bidang_industri }}"
+                                            id="bidangIndustri" class="form-control">
+                                        {{-- <option value="null" default>-- Pilih --</option>
                                             <option value="Teknologi Informasi dan Telekomunikasi">Teknologi Informasi dan
                                                 Telekomunikasi</option>
                                             <option value="Keuangan dan Perbankan">Keuangan dan Perbankan</option>
@@ -178,8 +193,9 @@
                                 <label for="menggunakanEmail">Seberapa sering Anda menggunakan email untuk keperluan
                                     pribadi
                                     atau pekerjaan? <span style="color: red">*</span></label>
-                                <input name="menggunakanEmail" id="menggunakanEmail" class="form-control" value="{{ $p->getResult->menggunakan_email }}">
-                                    {{-- <option value="null" default>-- Pilih --</option>
+                                <input name="menggunakanEmail" id="menggunakanEmail" class="form-control"
+                                    value="{{ $p->getResult->menggunakan_email }}">
+                                {{-- <option value="null" default>-- Pilih --</option>
                                     <option value="Setiap Hari">Setiap Hari</option>
                                     <option value="Beberapa Kali dalam Seminggu">Beberapa Kali dalam Seminggu</option>
                                     <option value="Sekitar Sekali Seminggu">Sekitar Sekali Seminggu</option>
@@ -194,8 +210,9 @@
                             <div class="card-body">
                                 <label for="mengalami">Apakah Anda pernah mengalami atau menyadari adanya upaya
                                     penipuan melalui email? <span style="color: red">*</span></label>
-                                <input value="{{ $p->getResult->mengalami }}" name="mengalami" id="mengalami" class="form-control">
-                                    {{-- <option value="null" default>-- Pilih --</option>
+                                <input value="{{ $p->getResult->mengalami }}" name="mengalami" id="mengalami"
+                                    class="form-control">
+                                {{-- <option value="null" default>-- Pilih --</option>
                                     <option value="Ya, Saya Pernah Mengalami">Ya, Saya Pernah Mengalami</option>
                                     <option value="Tidak, Saya Tidak Pernah Mengalami">Tidak, Saya Tidak Pernah Mengalami
                                     </option>
@@ -211,8 +228,9 @@
                             <div class="card-body">
                                 <label for="kesadaran">Seberapa sadar Anda terhadap potensi risiko keamanan
                                     email, seperti phishing atau penipuan email? <span style="color: red">*</span></label>
-                                <input  value="{{ $p->getResult->kesadaran }}" name="kesadaran" id="kesadaran" class="form-control">
-                                    {{-- <option value="null" default>-- Pilih --</option>
+                                <input value="{{ $p->getResult->kesadaran }}" name="kesadaran" id="kesadaran"
+                                    class="form-control">
+                                {{-- <option value="null" default>-- Pilih --</option>
                                     <option value="Sangat Sadar">Sangat Sadar</option>
                                     <option value="Cukup Sadar">Cukup Sadar
                                     </option>
@@ -227,8 +245,9 @@
                             <div class="card-body">
                                 <label for="korban">Apakah Anda pernah menjadi korban penipuan email atau
                                     keamanan email yang buruk? <span style="color: red">*</span></label>
-                                <input  value="{{ $p->getResult->korban }}" name="korban" id="korban" class="form-control">
-                                    {{-- <option value="null" default>-- Pilih --</option>
+                                <input value="{{ $p->getResult->korban }}" name="korban" id="korban"
+                                    class="form-control">
+                                {{-- <option value="null" default>-- Pilih --</option>
                                     <option value="Ya, Saya Pernah Menjadi Korban">Ya, Saya Pernah Menjadi Korban</option>
                                     <option value="Tidak, Saya Belum Pernah Menjadi Korban">Tidak, Saya Belum Pernah
                                         Menjadi
@@ -247,8 +266,9 @@
                                 <label for="penggunaExtension">Apakah Anda pernah menggunakan atau menginstall aplikasi
                                     Chrome
                                     Extension sebelumnya? <span style="color: red">*</span></label>
-                                <input  value="{{ $p->getResult->pengguna_extension }}" name="penggunaExtension" id="penggunaExtension" class="form-control">
-                                    {{-- <option value="null" default>-- Pilih --</option>
+                                <input value="{{ $p->getResult->pengguna_extension }}" name="penggunaExtension"
+                                    id="penggunaExtension" class="form-control">
+                                {{-- <option value="null" default>-- Pilih --</option>
                                     <option value="Ya, Saya Pernah">Ya, Saya Pernah</option>
                                     <option value="Tidak, Saya Belum Pernah">Tidak, Saya Belum Pernah
                                     </option> --}}
@@ -256,7 +276,8 @@
                                 <section class="mt-2" id="penggunaExtensionTrue" style="display: block;">
                                     <label for="penggunaExtensionSpesifik">Sebutkan beberapa aplikasi Chrome Extension yang
                                         biasa Anda gunakan <span style="color: red">*</span></label>
-                                    <input value="{{ $p->getResult->pengguna_extension_spesifik }}" type="text" id="penggunaExtensionSpesifik" name="penggunaExtensionSpesifik"
+                                    <input value="{{ $p->getResult->pengguna_extension_spesifik }}" type="text"
+                                        id="penggunaExtensionSpesifik" name="penggunaExtensionSpesifik"
                                         class="form-control">
                                 </section>
                             </div>
@@ -267,8 +288,9 @@
                                 <label for="deteksiEmail">Apakah Anda berpikir bahwa deteksi email penipuan
                                     adalah
                                     hal yang penting untuk keamanan email Anda? <span style="color: red">*</span></label>
-                                <input value="{{ $p->getResult->deteksi_email }}" name="deteksiEmail" id="deteksiEmail" class="form-control">
-                                    {{-- <option value="null" default>-- Pilih --</option>
+                                <input value="{{ $p->getResult->deteksi_email }}" name="deteksiEmail" id="deteksiEmail"
+                                    class="form-control">
+                                {{-- <option value="null" default>-- Pilih --</option>
                                     <option value="Sangat Penting">Sangat Penting</option>
                                     <option value="Penting">Penting</option>
                                     <option value="Netral">Netral</option>
@@ -284,8 +306,9 @@
                                     mempertimbangkan
                                     menggunakan alat atau layanan untuk melindungi diri dari penipuan email? <span
                                         style="color: red">*</span></label>
-                                <input value="{{ $p->getResult->mempertimbangkan }}" name="mempertimbangkan" id="mempertimbangkan" class="form-control">
-                                    {{-- <option value="null" default>-- Pilih --</option>
+                                <input value="{{ $p->getResult->mempertimbangkan }}" name="mempertimbangkan"
+                                    id="mempertimbangkan" class="form-control">
+                                {{-- <option value="null" default>-- Pilih --</option>
                                     <option value="Ya, Saya Sedang Menggunakan Alat atau Layanan Tersebut">Ya, Saya Sedang
                                         Menggunakan Alat atau Layanan Tersebut</option>
                                     <option value="Belum, Tetapi Saya Mempertimbangkan">Belum, Tetapi Saya Mempertimbangkan
@@ -351,8 +374,9 @@
                             <div class="card-body">
                                 <label for="seberapaNyaman">Seberapa nyaman Anda dengan ide menggunakan aplikasi Chrome
                                     Extension untuk melindungi email Anda? <span style="color: red">*</span></label>
-                                <input value="{{ $p->getResult->seberapa_nyaman }}" name="seberapaNyaman" id="seberapaNyaman" class="form-control">
-                                    {{-- <option value="null" default>-- Pilih --</option>
+                                <input value="{{ $p->getResult->seberapa_nyaman }}" name="seberapaNyaman"
+                                    id="seberapaNyaman" class="form-control">
+                                {{-- <option value="null" default>-- Pilih --</option>
                                     <option value="Sangat Nyaman">Sangat Nyaman</option>
                                     <option value="Nyaman">Nyaman
                                     </option>
@@ -415,6 +439,11 @@
 @section('script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script type="text/javascript">
+        $('#downloadBtn').on('click', function(e) {
+            e.preventDefault();
+            location.href = window.location.origin + '/adminPlace/excel';
+        });
+
         $(':input').prop('disabled', true);
 
         const menggunakan_email1 = '{{ $menggunakan_email1 }}';
@@ -423,8 +452,12 @@
         const menggunakan_email4 = '{{ $menggunakan_email4 }}';
         const menggunakan_email5 = '{{ $menggunakan_email5 }}';
 
-        var xValues_menggunakan_email = ["Setiap Hari", "Beberapa Kali dalam Seminggu", "Sekitar Sekali Seminggu", "Sekitar Sekali Sebulan", "Jarang Sekali atau Tidak Pernah"];
-        var yValues_menggunakan_email = [menggunakan_email1, menggunakan_email2, menggunakan_email3, menggunakan_email4, menggunakan_email5];
+        var xValues_menggunakan_email = ["Setiap Hari", "Beberapa Kali dalam Seminggu", "Sekitar Sekali Seminggu",
+            "Sekitar Sekali Sebulan", "Jarang Sekali atau Tidak Pernah"
+        ];
+        var yValues_menggunakan_email = [menggunakan_email1, menggunakan_email2, menggunakan_email3, menggunakan_email4,
+            menggunakan_email5
+        ];
         var barColors_menggunakan_email = ["red", "green", "blue", "orange", "brown"];
         new Chart("menggunakan_email_chart", {
             type: "pie",
@@ -449,7 +482,9 @@
         const mengalami4 = '{{ $mengalami4 }}';
         const mengalami5 = '{{ $mengalami5 }}';
 
-        var xValues_mengalami = ["Ya, Saya Pernah Mengalami", "Tidak, Saya Tidak Pernah Mengalami", "Tidak Yakin", "Mungkin, Tetapi Saya Tidak Yakin", "Tidak Ingin Mengungkapkan"];
+        var xValues_mengalami = ["Ya, Saya Pernah Mengalami", "Tidak, Saya Tidak Pernah Mengalami", "Tidak Yakin",
+            "Mungkin, Tetapi Saya Tidak Yakin", "Tidak Ingin Mengungkapkan"
+        ];
         var yValues_mengalami = [mengalami1, mengalami2, mengalami3, mengalami4, mengalami5];
         var barColors_mengalami = ["red", "green", "blue", "orange", "brown"];
         new Chart("mengalami_chart", {
@@ -501,7 +536,9 @@
         const korban4 = '{{ $korban4 }}';
         const korban5 = '{{ $korban5 }}';
 
-        var xValues_korban = ["Ya, Saya Pernah Menjadi Korban", "Tidak, Saya Belum Pernah Menjadi Korban", "Tidak Yakin", "Mungkin, Tetapi Saya Tidak Yakin", "Tidak Ingin Mengungkapkan"];
+        var xValues_korban = ["Ya, Saya Pernah Menjadi Korban", "Tidak, Saya Belum Pernah Menjadi Korban", "Tidak Yakin",
+            "Mungkin, Tetapi Saya Tidak Yakin", "Tidak Ingin Mengungkapkan"
+        ];
         var yValues_korban = [korban1, korban2, korban3, korban4, korban5];
         var barColors_korban = ["red", "green", "blue", "orange", "brown"];
         new Chart("korban_chart", {
@@ -550,7 +587,9 @@
         const deteksi_email4 = '{{ $deteksi_email4 }}';
         const deteksi_email5 = '{{ $deteksi_email5 }}';
 
-        var xValues_deteksi_email = ["Sangat Penting", "Penting", "Netral", "Tidak Terlalu Penting", "Tidak Penting Sama Sekali"];
+        var xValues_deteksi_email = ["Sangat Penting", "Penting", "Netral", "Tidak Terlalu Penting",
+            "Tidak Penting Sama Sekali"
+        ];
         var yValues_deteksi_email = [deteksi_email1, deteksi_email2, deteksi_email3, deteksi_email4, deteksi_email5];
         var barColors_deteksi_email = ["red", "green", "blue", "orange", "brown"];
         new Chart("deteksi_email_chart", {
@@ -576,8 +615,12 @@
         const mempertimbangkan4 = '{{ $mempertimbangkan4 }}';
         const mempertimbangkan5 = '{{ $mempertimbangkan5 }}';
 
-        var xValues_mempertimbangkan = ["Ya, Saya Sedang Menggunakan Alat atau Layanan Tersebut", "Belum, Tetapi Saya Mempertimbangkan", "Tidak Pernah Memikirkan", "Tidak Tahu", "Tidak Ingin Menggunakan"];
-        var yValues_mempertimbangkan = [mempertimbangkan1, mempertimbangkan2, mempertimbangkan3, mempertimbangkan4, mempertimbangkan5];
+        var xValues_mempertimbangkan = ["Ya, Saya Sedang Menggunakan Alat atau Layanan Tersebut",
+            "Belum, Tetapi Saya Mempertimbangkan", "Tidak Pernah Memikirkan", "Tidak Tahu", "Tidak Ingin Menggunakan"
+        ];
+        var yValues_mempertimbangkan = [mempertimbangkan1, mempertimbangkan2, mempertimbangkan3, mempertimbangkan4,
+            mempertimbangkan5
+        ];
         var barColors_mempertimbangkan = ["red", "green", "blue", "orange", "brown"];
         new Chart("mempertimbangkan_chart", {
             type: "pie",
@@ -603,7 +646,9 @@
         const fitur_utama5 = '{{ $fitur_utama5 }}';
         const fitur_utama6 = '{{ $fitur_utama6 }}';
 
-        var xValues_fitur_utama = ["Scan Email Otomatis", "Peringatan Langsung", "Integrasi Mudah", "Analisis Tautan dan Lampiran", "Pembaruan Berkala", "Panduan Keamanan"];
+        var xValues_fitur_utama = ["Scan Email Otomatis", "Peringatan Langsung", "Integrasi Mudah",
+            "Analisis Tautan dan Lampiran", "Pembaruan Berkala", "Panduan Keamanan"
+        ];
         var yValues_fitur_utama = [fitur_utama1, fitur_utama2, fitur_utama3, fitur_utama4, fitur_utama5, fitur_utama6];
         var barColors_fitur_utama = ["red", "green", "blue", "orange", "brown", "purple"];
         new Chart("fitur_utama_chart", {
@@ -630,7 +675,9 @@
         const seberapa_nyaman5 = '{{ $seberapa_nyaman5 }}';
 
         var xValues_seberapa_nyaman = ["Sangat Nyaman", "Nyaman", "Netral", "Tidak Nyaman", "Tidak Suka"];
-        var yValues_seberapa_nyaman = [seberapa_nyaman1, seberapa_nyaman2, seberapa_nyaman3, seberapa_nyaman4, seberapa_nyaman5];
+        var yValues_seberapa_nyaman = [seberapa_nyaman1, seberapa_nyaman2, seberapa_nyaman3, seberapa_nyaman4,
+            seberapa_nyaman5
+        ];
         var barColors_seberapa_nyaman = ["red", "green", "blue", "orange", "brown"];
         new Chart("seberapa_nyaman_chart", {
             type: "pie",

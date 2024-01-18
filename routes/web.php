@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\ExportsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,7 @@ Route::prefix('/adminPlace')->group(function () {
     Route::get('/', [AuthController::class, 'index']);
     Route::post('/auth', [AuthController::class, 'auth']);
     Route::get('/home', [AuthController::class, 'home']);
+    Route::get('/excel', [ExportsController::class, 'index']);
     Route::get('/logout', [AuthController::class, 'logout']);
 });
 
