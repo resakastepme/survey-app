@@ -11,7 +11,7 @@ class RespondensExport implements FromView
     public function view(): View
     {
         return view('exports.respondens', [
-            'respondens' => Respondens::all()
+            'respondens' => Respondens::orderby('id', 'DESC')
         ]);
     }
 }
