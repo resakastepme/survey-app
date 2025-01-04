@@ -23,6 +23,9 @@ class Results extends Model
         'fitur_utama',
         'seberapa_nyaman',
         'platform_email',
+        'latbel1',
+        'latbel2',
+        'latbel3'
     ];
 
     public function getResponden()

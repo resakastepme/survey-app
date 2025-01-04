@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\ExportsController;
 
@@ -53,6 +54,13 @@ Route::prefix('/adminPlace')->group(function () {
     Route::get('/home', [AuthController::class, 'home']);
     Route::get('/excel', [ExportsController::class, 'index']);
     Route::get('/logout', [AuthController::class, 'logout']);
+});
+
+// FOR TEST
+Route::prefix('/test')->group(function () {
+    Route::get('/latbel1', [TestController::class, 'latbel1']);
+    Route::get('/latbel2', [TestController::class, 'latbel2']);
+    Route::get('/latbel3', [TestController::class, 'latbel3']);
 });
 
 // CHECK ROUTE

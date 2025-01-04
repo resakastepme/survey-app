@@ -75,6 +75,24 @@
                             style="width:100%;max-width:700px;height:200%"></canvas>
                     </div>
                 </div>
+                <div class="card shadow rounded border-0 mt-3" style="background-color: rgb(231, 225, 225);">
+                    <div class="card-body">
+                        <canvas id="latbel1_chart" height="220"
+                            style="width:100%;max-width:700px;height:200%"></canvas>
+                    </div>
+                </div>
+                <div class="card shadow rounded border-0 mt-3" style="background-color: rgb(231, 225, 225);">
+                    <div class="card-body">
+                        <canvas id="latbel2_chart" height="220"
+                            style="width:100%;max-width:700px;height:200%"></canvas>
+                    </div>
+                </div>
+                <div class="card shadow rounded border-0 mt-3" style="background-color: rgb(231, 225, 225);">
+                    <div class="card-body">
+                        <canvas id="latbel3_chart" height="220"
+                            style="width:100%;max-width:700px;height:200%"></canvas>
+                    </div>
+                </div>
             </div>
             <div class="col-md-8">
 
@@ -421,6 +439,61 @@
                             </div>
                         </div>
 
+                        <div class="card rounded shadow border-0 bg-light mt-3">
+                            <div class="card-body">
+                                <label for="latbel1">Jika aplikasi ini mampu berjalan dengan baik di lebih dari satu
+                                    platform pengelola E-mail, apakah anda terbantu? <span
+                                        style="color: red">*</span></label>
+                                <input value="{{ $p->getResult->latbel1 }}" name="latbel1" id="latbel1"
+                                    class="form-control">
+                                {{-- <option value="null" default>-- Pilih --</option>
+                                    <option value="Sangat Nyaman">Sangat Nyaman</option>
+                                    <option value="Nyaman">Nyaman
+                                    </option>
+                                    <option value="Netral">Netral</option>
+                                    <option value="Tidak Nyaman">Tidak Nyaman</option>
+                                    <option value="Tidak Suka">Tidak Ingin Menggunakan</option> --}}
+                                </input>
+                            </div>
+                        </div>
+
+                        <div class="card rounded shadow border-0 bg-light mt-3">
+                            <div class="card-body">
+                                <label for="latbel2">Jika aplikasi memberikan real-time alert pada domain, file
+                                    attachment, dan url yang terindikasi berbahaya dan juga memberikan click prevention
+                                    untuk pencegahan pengguna untuk mengakses url atau file yang terindikasi berbahaya,
+                                    apakah anda terbantu? <span style="color: red">*</span></label>
+                                <input value="{{ $p->getResult->latbel2 }}" name="latbel2" id="latbel2"
+                                    class="form-control">
+                                {{-- <option value="null" default>-- Pilih --</option>
+                                    <option value="Sangat Nyaman">Sangat Nyaman</option>
+                                    <option value="Nyaman">Nyaman
+                                    </option>
+                                    <option value="Netral">Netral</option>
+                                    <option value="Tidak Nyaman">Tidak Nyaman</option>
+                                    <option value="Tidak Suka">Tidak Ingin Menggunakan</option> --}}
+                                </input>
+                            </div>
+                        </div>
+
+                        <div class="card rounded shadow border-0 bg-light mt-3">
+                            <div class="card-body">
+                                <label for="latbel3">Jika aplikasi ini memiliki kemampuan untuk meng-analisa file
+                                    attachment dari adanya ancaman malware, apakah anda terbantu? <span
+                                        style="color: red">*</span></label>
+                                <input value="{{ $p->getResult->latbel3 }}" name="latbel3" id="latbel3"
+                                    class="form-control">
+                                {{-- <option value="null" default>-- Pilih --</option>
+                                    <option value="Sangat Nyaman">Sangat Nyaman</option>
+                                    <option value="Nyaman">Nyaman
+                                    </option>
+                                    <option value="Netral">Netral</option>
+                                    <option value="Tidak Nyaman">Tidak Nyaman</option>
+                                    <option value="Tidak Suka">Tidak Ingin Menggunakan</option> --}}
+                                </input>
+                            </div>
+                        </div>
+
                         <small style="font-size: 10px;"> ***Catatan: form dengan simbol <span style="color: red">*</span>
                             wajib di isi! </small>
                     @endforeach
@@ -717,6 +790,72 @@
                 title: {
                     display: true,
                     text: "Dari beberapa Platform Pengelola Email dibawah ini, manakah yang anda gunakan?"
+                }
+            }
+        });
+
+        const latbel1y = '{{ $latbel1y }}';
+        const latbel1t = '{{ $latbel1t }}';
+        var xValues_latbel1 = ["Ya", "Tidak"];
+        var yValues_latbel1 = [latbel1y, latbel1t];
+        var barColors_latbel1 = ["green", "red"];
+        new Chart("latbel1_chart", {
+            type: "pie",
+            data: {
+                labels: xValues_latbel1,
+                datasets: [{
+                    backgroundColor: barColors_latbel1,
+                    data: yValues_latbel1
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Jika aplikasi ini mampu berjalan dengan baik di lebih dari satu platform pengelola E-mail, apakah anda terbantu?"
+                }
+            }
+        });
+
+        const latbel2y = '{{ $latbel2y }}';
+        const latbel2t = '{{ $latbel2t }}';
+        var xValues_latbel2 = ["Ya", "Tidak"];
+        var yValues_latbel2 = [latbel2y, latbel2t];
+        var barColors_latbel2 = ["green", "red"];
+        new Chart("latbel2_chart", {
+            type: "pie",
+            data: {
+                labels: xValues_latbel2,
+                datasets: [{
+                    backgroundColor: barColors_latbel2,
+                    data: yValues_latbel2
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Jika aplikasi memberikan real-time alert pada domain, file attachment, dan url yang terindikasi berbahaya dan juga memberikan click prevention untuk pencegahan pengguna untuk mengakses url atau file yang terindikasi berbahaya, apakah anda terbantu?"
+                }
+            }
+        });
+
+        const latbel3y = '{{ $latbel3y }}';
+        const latbel3t = '{{ $latbel3t }}';
+        var xValues_latbel3 = ["Ya", "Tidak"];
+        var yValues_latbel3 = [latbel3y, latbel3t];
+        var barColors_latbel3 = ["green", "red"];
+        new Chart("latbel3_chart", {
+            type: "pie",
+            data: {
+                labels: xValues_latbel3,
+                datasets: [{
+                    backgroundColor: barColors_latbel3,
+                    data: yValues_latbel3
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Jika aplikasi ini memiliki kemampuan untuk meng-analisa file attachment dari adanya ancaman malware, apakah anda terbantu?"
                 }
             }
         });

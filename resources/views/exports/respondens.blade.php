@@ -18,6 +18,9 @@
         <th>Fitur Utama</th>
         <th>Seberapa Nyaman</th>
         <th>Platform Email</th>
+        <th>Multiplatform</th>
+        <th>Real-time dan Click Prevention</th>
+        <th>Analisa File</th>
         <th>Waktu</th>
     </tr>
     </thead>
@@ -41,6 +44,9 @@
             <td>{{ $r->getResult->fitur_utama }}</td>
             <td>{{ $r->getResult->seberapa_nyaman }}</td>
             <td>{{ $r->getResult->platform_email }}</td>
+            <td>{{ $r->getResult->latbel1 }}</td>
+            <td>{{ $r->getResult->latbel2 }}</td>
+            <td>{{ $r->getResult->latbel3 }}</td>
             <td>{{ $r->getResult->updated_at }}</td>
         </tr>
     @endforeach

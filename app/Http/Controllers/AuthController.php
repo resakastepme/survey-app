@@ -151,6 +151,13 @@ class AuthController extends Controller
         $platform_email2 = Results::where('platform_email', 'LIKE', '%Gmail%')->count();
         $platform_email3 = Results::where('platform_email', 'LIKE', '%Yahoo Mail%')->count();
         $platform_email4 = Results::where('platform_email', 'LIKE', '%Apple Mail%')->count();
+
+        $latbel1y = Results::where('latbel1', 'Ya')->count();
+        $latbel1t = Results::where('latbel1', 'Tidak')->count();
+        $latbel2y = Results::where('latbel2', 'Ya')->count();
+        $latbel2t = Results::where('latbel2', 'Tidak')->count();
+        $latbel3y = Results::where('latbel3', 'Ya')->count();
+        $latbel3t = Results::where('latbel3', 'Tidak')->count();
         // $platform_email5 = Results::where('platform_email', 'NOT LIKE', 'RoundCube')->where('platform_email', 'NOT LIKE', 'Gmail')->where('platform_email', 'NOT LIKE', 'Yahoo Mail')->where('platform_email', 'NOT LIKE', 'Apple Mail')->count();
         // dd($post);
         return view('admin.home', compact('post'), [
@@ -202,6 +209,12 @@ class AuthController extends Controller
             'platform_email2' => $platform_email2,
             'platform_email3' => $platform_email3,
             'platform_email4' => $platform_email4,
+            'latbel1y' => $latbel1y,
+            'latbel1t' => $latbel1t,
+            'latbel2y' => $latbel2y,
+            'latbel2t' => $latbel2t,
+            'latbel3y' => $latbel3y,
+            'latbel3t' => $latbel3t
         ]);
     }
 

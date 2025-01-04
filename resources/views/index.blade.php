@@ -98,9 +98,9 @@
                                             <input type="hidden" id="respondenIdHidden">
                                             <form id="formResentEmail">
                                                 <input type="email" class="form-control" id="emailNotReadOnly">
-                                                <button class="btn btn-secondary mt-2" type="submit"
-                                                    id="resentEmailBtn"> <i class="spinner-border spinner-border-sm"
-                                                        id="resentEmailSpinner" style="display: none;"></i> Coba lagi
+                                                <button class="btn btn-secondary mt-2" type="submit" id="resentEmailBtn">
+                                                    <i class="spinner-border spinner-border-sm" id="resentEmailSpinner"
+                                                        style="display: none;"></i> Coba lagi
                                                 </button>
                                             </form>
                                         </div>
@@ -446,6 +446,46 @@
 
                                 </div>
 
+                            </div>
+                        </div>
+
+                        <div class="card rounded shadow border-0 bg-light mt-3">
+                            <div class="card-body">
+                                <label for="latbel1">Jika aplikasi ini mampu berjalan dengan baik di lebih dari satu
+                                    platform pengelola E-mail, apakah anda terbantu? <span
+                                        style="color: red">*</span></label>
+                                <select name="latbel1" id="latbel1" class="form-control">
+                                    <option value="null" default>-- Pilih --</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="card rounded shadow border-0 bg-light mt-3">
+                            <div class="card-body">
+                                <label for="latbel2">Jika aplikasi memberikan real-time alert pada domain, file
+                                    attachment, dan url yang terindikasi berbahaya dan juga memberikan click prevention
+                                    untuk pencegahan pengguna untuk mengakses url atau file yang terindikasi berbahaya,
+                                    apakah anda terbantu? <span style="color: red">*</span></label>
+                                <select name="latbel2" id="latbel2" class="form-control">
+                                    <option value="null" default>-- Pilih --</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="card rounded shadow border-0 bg-light mt-3">
+                            <div class="card-body">
+                                <label for="latbel3">Jika aplikasi ini memiliki kemampuan untuk meng-analisa file
+                                    attachment dari adanya ancaman malware, apakah anda terbantu? <span
+                                        style="color: red">*</span></label>
+                                <select name="latbel3" id="latbel3" class="form-control">
+                                    <option value="null" default>-- Pilih --</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                </select>
                             </div>
                         </div>
 

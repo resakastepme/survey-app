@@ -41,6 +41,9 @@ class SurveyController extends Controller
             $fitur_utama = $_POST['fitur_utama'];
             $seberapa_nyaman = $_POST['seberapa_nyaman'];
             $platform_email = $_POST['platform_email'];
+            $latbel1 = $_POST['latbel1'];
+            $latbel2 = $_POST['latbel2'];
+            $latbel3 = $_POST['latbel3'];
 
             $result = [
                 'menggunakan_email' => $menggunakan_email,
@@ -53,7 +56,10 @@ class SurveyController extends Controller
                 'mempertimbangkan' => $mempertimbangkan,
                 'fitur_utama' => $fitur_utama,
                 'seberapa_nyaman' => $seberapa_nyaman,
-                'platform_email' => $platform_email
+                'platform_email' => $platform_email,
+                'latbel1' => $latbel1,
+                'latbel2' => $latbel2,
+                'latbel3' => $latbel3
             ];
 
             $q2 = Results::create($result);

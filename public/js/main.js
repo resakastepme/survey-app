@@ -436,6 +436,11 @@ $(document).ready(function () {
         const platformEmail = checkedValues1.join(", ");
         const LainnyaEmail = $('#LainnyaEmail').val();
 
+        //NEW
+        const latbel1 = $('#latbel1').val();
+        const latbel2 = $('#latbel2').val();
+        const latbel3 = $('#latbel3').val();
+
         if (menggunakanEmail == 'null') {
             const toast = document.getElementById('toast-warningLengkapiForm')
             const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
@@ -510,6 +515,31 @@ $(document).ready(function () {
             return;
         }
 
+        // NEW
+        if (latbel1 == 'null') {
+            const toast = document.getElementById('toast-warningLengkapiForm')
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
+            toastBootstrap.show();
+            $('#latbel1').focus();
+            return;
+        }
+
+        if (latbel2 == 'null') {
+            const toast = document.getElementById('toast-warningLengkapiForm')
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
+            toastBootstrap.show();
+            $('#latbel2').focus();
+            return;
+        }
+
+        if (latbel3 == 'null') {
+            const toast = document.getElementById('toast-warningLengkapiForm')
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
+            toastBootstrap.show();
+            $('#latbel3').focus();
+            return;
+        }
+
         var platformEmailTrue;
         if (platformEmail == '') {
             if (LainnyaEmail == '') {
@@ -547,7 +577,10 @@ $(document).ready(function () {
                 mempertimbangkan: mempertimbangkan,
                 fitur_utama: fiturUtama,
                 seberapa_nyaman: seberapaNyaman,
-                platform_email: platformEmailTrue
+                platform_email: platformEmailTrue,
+                latbel1: latbel1,
+                latbel2: latbel2,
+                latbel3: latbel3
             },
             beforeSend: function () {
                 $('#btnSubmit').prop('disabled', true);
